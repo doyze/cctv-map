@@ -224,8 +224,19 @@
                     checkVisibleMarkers();
                 });
 
-            // --- Popup open: update status + play HLS ---
+            // --- Cleanup HLS helper ---
+            function cleanupHls() {
+                if (previewHls) {
+                    previewHls.destroy();
+                    previewHls = null;
+                }
+            }
+
+            // --- Popup open: cleanup old stream first, then play new ---
             map.on('popupopen', function(e) {
+                // Always cleanup previous HLS first (fixes switching markers without closing)
+                cleanupHls();
+
                 var marker = e.popup._source;
                 var url = marker._streamUrl;
 
@@ -242,6 +253,9 @@
                 if (!video) return;
 
                 msg.textContent = '';
+                video.pause();
+                video.removeAttribute('src');
+                video.load();
                 video.style.display = 'block';
 
                 if (!url) {
@@ -276,17 +290,8 @@
             });
 
             // --- Popup close: cleanup HLS ---
-            map.on('popupclose', function(e) {
-                if (previewHls) {
-                    previewHls.destroy();
-                    previewHls = null;
-                }
-                var video = document.getElementById('cam-video');
-                if (video) {
-                    video.pause();
-                    video.removeAttribute('src');
-                    video.load();
-                }
+            map.on('popupclose', function() {
+                cleanupHls();
             });
         </script>
     </body>
