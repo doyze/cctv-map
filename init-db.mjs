@@ -1,10 +1,9 @@
-import { readFileSync } from "fs";
+import { readFileSync, readdirSync } from "fs";
 import { join } from "path";
 import { fileURLToPath } from "url";
 import Database from "better-sqlite3";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
-const csvPath = join(__dirname, "data", "cctv.csv");
 const dbPath = join(__dirname, "data", "cctv.db");
 
 const db = new Database(dbPath);
@@ -21,49 +20,76 @@ db.exec(`
   );
 `);
 
-const csv = readFileSync(csvPath, "utf-8");
-const lines = csv.trim().split("\n");
-
 const insert = db.prepare(
   "INSERT INTO cameras (name, status, lat, lon, stream_url) VALUES (?, ?, ?, ?, ?)"
 );
 
-const insertAll = db.transaction((rows) => {
-  for (const row of rows) {
-    insert.run(row.name, row.status, row.lat, row.lon, row.url);
-  }
-});
+function parseCSV(text) {
+  const lines = text.trim().split("\n");
+  const header = lines[0].toLowerCase();
+  const isPattaya = header.includes("streamurl");
+  const rows = [];
 
-const rows = [];
-for (let i = 1; i < lines.length; i++) {
-  const line = lines[i];
-  const fields = [];
-  let field = "";
-  let inQuotes = false;
-  for (let j = 0; j < line.length; j++) {
-    const c = line[j];
-    if (c === '"') {
-      inQuotes = !inQuotes;
-    } else if (c === "," && !inQuotes) {
-      fields.push(field);
-      field = "";
+  for (let i = 1; i < lines.length; i++) {
+    const line = lines[i].trim();
+    if (!line) continue;
+
+    const fields = [];
+    let field = "";
+    let inQ = false;
+    for (let j = 0; j < line.length; j++) {
+      const c = line[j];
+      if (c === '"') inQ = !inQ;
+      else if (c === "," && !inQ) { fields.push(field); field = ""; }
+      else field += c;
+    }
+    fields.push(field);
+
+    let name, status, lat, lon, url;
+    if (isPattaya) {
+      name = fields[1] || "";
+      status = "online";
+      lat = parseFloat(fields[2]);
+      lon = parseFloat(fields[3]);
+      url = fields[4] || "";
     } else {
-      field += c;
+      name = fields[1] || "";
+      status = fields[2] || "online";
+      lat = parseFloat(fields[3]);
+      lon = parseFloat(fields[4]);
+      url = fields[5] || "";
+    }
+
+    if (name && !isNaN(lat) && !isNaN(lon) && url) {
+      rows.push({ name, status, lat, lon, url });
     }
   }
-  fields.push(field);
-  if (fields.length >= 6) {
-    rows.push({
-      name: fields[1],
-      status: fields[2],
-      lat: parseFloat(fields[3]),
-      lon: parseFloat(fields[4]),
-      url: fields[5],
-    });
-  }
+  return rows;
 }
 
-insertAll(rows);
+// Find all CSV files: data/cctv.csv + *.csv in root
+const csvFiles = [];
+const dataCsv = join(__dirname, "data", "cctv.csv");
+try { readFileSync(dataCsv); csvFiles.push(dataCsv); } catch {}
+
+const rootFiles = readdirSync(__dirname);
+for (const f of rootFiles) {
+  if (f.endsWith("_cctv.csv")) csvFiles.push(join(__dirname, f));
+}
+
+let total = 0;
+const tx = db.transaction(() => {
+  for (const csvFile of csvFiles) {
+    const text = readFileSync(csvFile, "utf-8");
+    const rows = parseCSV(text);
+    for (const r of rows) {
+      insert.run(r.name, r.status, r.lat, r.lon, r.url);
+    }
+    console.log(`  ${csvFile}: ${rows.length} cameras`);
+    total += rows.length;
+  }
+});
+tx();
 db.close();
 
-console.log(`Imported ${rows.length} cameras into ${dbPath}`);
+console.log(`Total: ${total} cameras imported into ${dbPath}`);
