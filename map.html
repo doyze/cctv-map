@@ -5,7 +5,6 @@
         <title>CCTV Map - Udon Thani</title>
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/hls.js@latest/dist/hls.min.js"></script>
         <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
         <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
         <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
@@ -13,11 +12,6 @@
             * { box-sizing: border-box; }
             body { padding: 0; margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
             html, body, #map { height: 100%; width: 100%; }
-            .cam-popup { min-width: 340px; }
-            .cam-popup .cam-name { font-weight: 600; margin-bottom: 4px; font-size: 14px; }
-            .cam-popup .cam-status { font-size: 12px; margin-bottom: 6px; }
-            .cam-popup .cam-status.online { color: #2e7d32; }
-            .cam-popup .cam-status.offline { color: #c62828; }
             .nav-link {
                 position: fixed; top: 12px; right: 12px; z-index: 1000;
                 background: #fff; color: #333; text-decoration: none;
@@ -26,11 +20,103 @@
                 transition: background .15s;
             }
             .nav-link:hover { background: #f5f5f5; }
+
+            /* Video Preview Modal (same as admin) */
+            .preview-overlay {
+                display: none;
+                position: fixed; inset: 0;
+                background: rgba(0,0,0,.6);
+                z-index: 2000;
+                justify-content: center;
+                align-items: center;
+            }
+            .preview-overlay.active { display: flex; }
+            .preview-box {
+                background: #111;
+                border-radius: 12px;
+                width: 90%;
+                max-width: 640px;
+                overflow: hidden;
+                box-shadow: 0 20px 60px rgba(0,0,0,.5);
+            }
+            .preview-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 14px 18px;
+                background: #1a1a1a;
+            }
+            .preview-header h3 {
+                color: #fff;
+                font-size: 14px;
+                font-weight: 500;
+                margin: 0;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+            .preview-header .preview-status {
+                display: inline-block;
+                width: 8px; height: 8px;
+                border-radius: 50%;
+            }
+            .preview-header .preview-status.online { background: #4caf50; }
+            .preview-header .preview-status.offline { background: #e53935; }
+            .preview-close {
+                background: none;
+                border: none;
+                color: #888;
+                font-size: 22px;
+                cursor: pointer;
+                padding: 0 4px;
+                line-height: 1;
+                transition: color .15s;
+            }
+            .preview-close:hover { color: #fff; }
+            .preview-video {
+                position: relative;
+                width: 100%;
+                padding-top: 56.25%; /* 16:9 */
+                background: #000;
+            }
+            .preview-video video {
+                position: absolute;
+                top: 0; left: 0;
+                width: 100%; height: 100%;
+                object-fit: contain;
+            }
+            .preview-video .preview-msg {
+                position: absolute;
+                top: 50%; left: 50%;
+                transform: translate(-50%, -50%);
+                color: #888;
+                font-size: 14px;
+                text-align: center;
+            }
         </style>
     </head>
     <body>
         <a href="/admin.html" class="nav-link">Admin</a>
         <div id="map"></div>
+
+        <!-- Video Preview Modal -->
+        <div class="preview-overlay" id="preview-modal">
+            <div class="preview-box">
+                <div class="preview-header">
+                    <h3>
+                        <span class="preview-status" id="preview-status-dot"></span>
+                        <span id="preview-name"></span>
+                    </h3>
+                    <button class="preview-close" onclick="closePreview()">&times;</button>
+                </div>
+                <div class="preview-video">
+                    <video id="preview-video" autoplay muted playsinline></video>
+                    <div class="preview-msg" id="preview-msg"></div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.7/dist/hls.min.js"></script>
         <script>
             var map = L.map('map').setView([17.4046, 102.7943], 14);
 
@@ -38,7 +124,7 @@
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
 
-            var hls = null;
+            var previewHls = null;
             var allMarkers = [];
 
             // Red icon for offline cameras
@@ -118,20 +204,15 @@
 
                         var opts = cam.status === 'offline' ? { icon: redIcon } : {};
                         var m = L.marker([cam.lat, cam.lon], opts);
-
-                        var statusClass = cam.status === 'online' ? 'online' : 'offline';
-                        var statusText = cam.status === 'online' ? 'Online' : 'Offline';
-                        var popupHtml =
-                            '<div class="cam-popup">' +
-                                '<div class="cam-name">' + cam.name + '</div>' +
-                                '<div class="cam-status ' + statusClass + '">' + statusText + '</div>' +
-                                '<video id="video" width="320" height="240" autoplay muted></video>' +
-                            '</div>';
-
-                        m.bindPopup(popupHtml, { maxWidth: 360 });
                         m._streamUrl = cam.stream_url;
                         m._camId = cam.id;
+                        m._camName = cam.name;
                         m._status = cam.status;
+
+                        m.on('click', function() {
+                            openPreview(this);
+                        });
+
                         markers.addLayer(m);
                         allMarkers.push(m);
                     });
@@ -141,39 +222,78 @@
                     checkVisibleMarkers();
                 });
 
-            // --- Popup: play video + show updated status ---
-            map.on('popupopen', function(e) {
-                var marker = e.popup._source;
+            // --- Video Preview (same style as admin) ---
+            function openPreview(marker) {
+                var name = marker._camName || 'Camera';
+                var status = marker._status || 'offline';
                 var url = marker._streamUrl;
 
-                // Update popup status text from stored status
-                if (marker._status) {
-                    var statusEl = marker.getPopup().getElement().querySelector('.cam-status');
-                    if (statusEl) {
-                        statusEl.className = 'cam-status ' + marker._status;
-                        statusEl.textContent = marker._status === 'online' ? 'Online' : 'Offline';
-                    }
+                document.getElementById('preview-name').textContent = name;
+                var dot = document.getElementById('preview-status-dot');
+                dot.className = 'preview-status ' + status;
+
+                var video = document.getElementById('preview-video');
+                var msg = document.getElementById('preview-msg');
+                msg.textContent = '';
+                video.style.display = 'block';
+
+                // Cleanup previous
+                if (previewHls) { previewHls.destroy(); previewHls = null; }
+                video.pause();
+                video.removeAttribute('src');
+                video.load();
+
+                if (!url) {
+                    video.style.display = 'none';
+                    msg.textContent = 'ไม่มี Stream URL';
+                    document.getElementById('preview-modal').classList.add('active');
+                    return;
                 }
 
-                if (url) {
-                    var video = document.getElementById('video');
-                    if (Hls.isSupported()) {
-                        hls = new Hls();
-                        hls.loadSource(url);
-                        hls.attachMedia(video);
-                    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                        video.src = url;
-                    }
+                if (url.includes('.m3u8') && Hls.isSupported()) {
+                    previewHls = new Hls({ enableWorker: true, lowLatencyMode: true });
+                    previewHls.loadSource(url);
+                    previewHls.attachMedia(video);
+                    previewHls.on(Hls.Events.MANIFEST_PARSED, function() {
+                        video.play().catch(function(){});
+                    });
+                    previewHls.on(Hls.Events.ERROR, function(ev, data) {
+                        if (data.fatal) {
+                            video.style.display = 'none';
+                            msg.textContent = 'ไม่สามารถโหลดสตรีมได้';
+                        }
+                    });
+                } else if (url.includes('.m3u8') && video.canPlayType('application/vnd.apple.mpegurl')) {
+                    video.src = url;
+                    video.play().catch(function(){});
+                } else {
+                    video.src = url;
+                    video.play().catch(function() {
+                        video.style.display = 'none';
+                        msg.textContent = 'ไม่สามารถโหลดสตรีมได้';
+                    });
                 }
+
+                document.getElementById('preview-modal').classList.add('active');
+            }
+
+            function closePreview() {
+                document.getElementById('preview-modal').classList.remove('active');
+                var video = document.getElementById('preview-video');
+                if (previewHls) { previewHls.destroy(); previewHls = null; }
+                video.pause();
+                video.removeAttribute('src');
+                video.load();
+            }
+
+            // Close preview on overlay click
+            document.getElementById('preview-modal').addEventListener('click', function(e) {
+                if (e.target === this) closePreview();
             });
 
-            map.on('popupclose', function(e) {
-                if (hls) {
-                    hls.destroy();
-                    hls = null;
-                }
-                var video = document.getElementById('video');
-                if (video) video.remove();
+            // Close preview on Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') closePreview();
             });
         </script>
     </body>
