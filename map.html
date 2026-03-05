@@ -250,8 +250,9 @@
                     }
                 }
 
-                var video = document.getElementById('cam-video');
-                var msg = document.getElementById('cam-msg');
+                var popupEl = e.popup.getElement();
+                var video = popupEl.querySelector('#cam-video');
+                var msg = popupEl.querySelector('#cam-msg');
                 if (!video) return;
 
                 msg.textContent = '';
