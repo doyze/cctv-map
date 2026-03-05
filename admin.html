@@ -466,22 +466,38 @@ function logout() {
     document.getElementById('login-error').style.display = 'none';
 }
 
-function showApp() {
+async function showApp() {
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('app').style.display = 'block';
-    load();
-    checkStatus();
+    await load();
+    checkStatus(); // check all 614 on first login
 }
 
-async function checkStatus() {
-    document.getElementById('count').textContent = 'กำลังตรวจสอบสถานะกล้อง...';
+async function checkStatus(ids) {
+    var label = ids ? 'กำลังตรวจสอบ ' + ids.length + ' กล้อง...' : 'กำลังตรวจสอบสถานะกล้องทั้งหมด...';
+    document.getElementById('count').textContent = label;
     try {
-        await fetch('/api/cameras/check-status', {
+        var body = ids ? { ids: ids } : {};
+        var res = await fetch('/api/cameras/check-status', {
             method: 'POST',
-            headers: authHeaders()
+            headers: authHeaders(),
+            body: JSON.stringify(body)
         });
-        await load();
+        var results = await res.json();
+        // Update local cameras array with new statuses
+        results.forEach(function(r) {
+            var cam = cameras.find(function(c) { return c.id === r.id; });
+            if (cam) cam.status = r.status;
+        });
+        render();
     } catch {}
+}
+
+function checkCurrentPage() {
+    var start = (currentPage - 1) * PER_PAGE;
+    var page = cameras.slice(start, start + PER_PAGE);
+    var ids = page.map(function(c) { return c.id; });
+    if (ids.length) checkStatus(ids);
 }
 
 function authHeaders() {
@@ -579,6 +595,7 @@ function goPage(p) {
     currentPage = p;
     render();
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    checkCurrentPage();
 }
 
 function esc(s) {

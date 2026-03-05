@@ -81,11 +81,10 @@ const stmts = {
 
 // --- Stream check ---
 
-function checkStream(url, timeoutMs = 5000) {
+function checkStream(url, timeoutMs = 10000) {
   return new Promise((resolve) => {
     const getter = url.startsWith("https") ? httpsGet : httpGet;
     const req = getter(url, { timeout: timeoutMs }, (res) => {
-      // Got response - online if 2xx
       const online = res.statusCode >= 200 && res.statusCode < 400;
       res.destroy();
       resolve(online);
@@ -95,8 +94,10 @@ function checkStream(url, timeoutMs = 5000) {
   });
 }
 
-async function checkAllCameras() {
-  const cameras = stmts.getAll.all();
+async function checkCamerasByIds(ids) {
+  const cameras = ids.length
+    ? ids.map((id) => stmts.getOne.get(id)).filter(Boolean)
+    : stmts.getAll.all();
   const results = await Promise.all(
     cameras.map(async (cam) => {
       const online = await checkStream(cam.stream_url);
@@ -138,13 +139,34 @@ async function handleAPI(req, res) {
   }
 
   // POST /api/cameras/check-status (requires auth)
+  // body: { ids: [1,2,3] } to check specific cameras, or omit for all
   if (path === "/api/cameras/check-status" && method === "POST") {
     if (!checkAuth(req)) {
       return json(res, 401, { error: "Unauthorized" });
     }
     try {
-      const results = await checkAllCameras();
+      const body = await readBody(req).catch(() => ({}));
+      const ids = Array.isArray(body.ids) ? body.ids : [];
+      const results = await checkCamerasByIds(ids);
       return json(res, 200, results);
+    } catch (e) {
+      return json(res, 500, { error: e.message });
+    }
+  }
+
+  // POST /api/cameras/check-one (public - for map popup)
+  // body: { id: 123 }
+  if (path === "/api/cameras/check-one" && method === "POST") {
+    try {
+      const body = await readBody(req);
+      const cam = stmts.getOne.get(body.id);
+      if (!cam) return json(res, 404, { error: "Not found" });
+      const online = await checkStream(cam.stream_url);
+      const status = online ? "online" : "offline";
+      if (cam.status !== status) {
+        stmts.updateStatus.run(status, cam.id);
+      }
+      return json(res, 200, { id: cam.id, status });
     } catch (e) {
       return json(res, 500, { error: e.message });
     }
