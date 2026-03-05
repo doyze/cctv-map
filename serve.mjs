@@ -26,6 +26,22 @@ const ADMIN_PASSCODE = process.env.ADMIN_PASSCODE || "";
 const db = new Database(join(__dirname, "data", "cctv.db"));
 db.pragma("journal_mode = WAL");
 
+// --- Log buffer (last 50 lines) ---
+const LOG_MAX = 50;
+const logBuffer = [];
+const origLog = console.log.bind(console);
+const origError = console.error.bind(console);
+
+function pushLog(level, args) {
+  const ts = new Date().toLocaleTimeString("th-TH", { hour12: false });
+  const msg = args.map((a) => (typeof a === "string" ? a : JSON.stringify(a))).join(" ");
+  logBuffer.push({ ts, level, msg });
+  if (logBuffer.length > LOG_MAX) logBuffer.shift();
+}
+
+console.log = (...args) => { origLog(...args); pushLog("info", args); };
+console.error = (...args) => { origError(...args); pushLog("error", args); };
+
 const MIME_TYPES = {
   ".html": "text/html; charset=utf-8",
   ".js": "application/javascript",
@@ -104,6 +120,7 @@ async function checkCamerasByIds(ids) {
       const status = online ? "online" : "offline";
       if (cam.status !== status) {
         stmts.updateStatus.run(status, cam.id);
+        console.log(`[STATUS] #${cam.id} "${cam.name}" ${cam.status} → ${status}`);
       }
       return { id: cam.id, name: cam.name, status };
     })
@@ -125,13 +142,32 @@ async function handleAPI(req, res) {
   const path = url.pathname;
   const method = req.method;
 
+  // GET /api/logs (public - for map log panel)
+  if (path === "/api/logs" && method === "GET") {
+    const n = parseInt(url.searchParams.get("n") || "20", 10);
+    return json(res, 200, logBuffer.slice(-n));
+  }
+
+  // POST /api/cameras/view (public - log stream view)
+  if (path === "/api/cameras/view" && method === "POST") {
+    try {
+      const body = await readBody(req);
+      console.log(`[VIEW] Viewing stream: #${body.id} "${body.name}"`);
+      return json(res, 200, { ok: true });
+    } catch (e) {
+      return json(res, 400, { error: e.message });
+    }
+  }
+
   // POST /api/login
   if (path === "/api/login" && method === "POST") {
     try {
       const body = await readBody(req);
       if (body.passcode === ADMIN_PASSCODE) {
+        console.log("[AUTH] Admin login success");
         return json(res, 200, { ok: true });
       }
+      console.log("[AUTH] Admin login failed — wrong passcode");
       return json(res, 401, { error: "Passcode ไม่ถูกต้อง" });
     } catch (e) {
       return json(res, 400, { error: e.message });
@@ -147,7 +183,10 @@ async function handleAPI(req, res) {
     try {
       const body = await readBody(req).catch(() => ({}));
       const ids = Array.isArray(body.ids) ? body.ids : [];
+      console.log(`[CHECK] Admin check-status: ${ids.length || "all"} cameras`);
       const results = await checkCamerasByIds(ids);
+      const online = results.filter((r) => r.status === "online").length;
+      console.log(`[CHECK] Result: ${online}/${results.length} online`);
       return json(res, 200, results);
     } catch (e) {
       return json(res, 500, { error: e.message });
@@ -161,9 +200,13 @@ async function handleAPI(req, res) {
       const body = await readBody(req);
       const ids = Array.isArray(body.ids) ? body.ids : [];
       if (ids.length === 0) return json(res, 200, []);
+      console.log(`[BATCH] Checking ${ids.length} visible cameras...`);
       const results = await checkCamerasByIds(ids);
+      const online = results.filter((r) => r.status === "online").length;
+      console.log(`[BATCH] Done: ${online}/${results.length} online`);
       return json(res, 200, results);
     } catch (e) {
+      console.error(`[BATCH] Error: ${e.message}`);
       return json(res, 500, { error: e.message });
     }
   }
@@ -179,7 +222,9 @@ async function handleAPI(req, res) {
       const status = online ? "online" : "offline";
       if (cam.status !== status) {
         stmts.updateStatus.run(status, cam.id);
+        console.log(`[STATUS] #${cam.id} "${cam.name}" ${cam.status} → ${status}`);
       }
+      console.log(`[CHECK-ONE] #${cam.id} "${cam.name}" → ${status}`);
       return json(res, 200, { id: cam.id, status });
     } catch (e) {
       return json(res, 500, { error: e.message });
@@ -188,7 +233,9 @@ async function handleAPI(req, res) {
 
   // GET /api/cameras (public)
   if (path === "/api/cameras" && method === "GET") {
-    return json(res, 200, stmts.getAll.all());
+    const all = stmts.getAll.all();
+    console.log(`[LOAD] Camera list loaded: ${all.length} cameras`);
+    return json(res, 200, all);
   }
 
   // Write operations require auth
@@ -210,8 +257,10 @@ async function handleAPI(req, res) {
         stream_url: body.stream_url,
       });
       const cam = stmts.getOne.get(result.lastInsertRowid);
+      console.log(`[ADD] Camera added: #${cam.id} "${cam.name}"`);
       return json(res, 201, cam);
     } catch (e) {
+      console.error(`[ADD] Error: ${e.message}`);
       return json(res, 400, { error: e.message });
     }
   }
@@ -238,14 +287,20 @@ async function handleAPI(req, res) {
           stream_url: body.stream_url,
         });
         const cam = stmts.getOne.get(id);
+        if (cam) console.log(`[EDIT] Camera updated: #${cam.id} "${cam.name}"`);
         return cam ? json(res, 200, cam) : json(res, 404, { error: "Not found" });
       } catch (e) {
+        console.error(`[EDIT] Error: ${e.message}`);
         return json(res, 400, { error: e.message });
       }
     }
 
     if (method === "DELETE") {
+      const cam = stmts.getOne.get(id);
       const result = stmts.delete.run(id);
+      if (result.changes) {
+        console.log(`[DELETE] Camera removed: #${id}${cam ? ` "${cam.name}"` : ""}`);
+      }
       return result.changes
         ? json(res, 200, { deleted: true })
         : json(res, 404, { error: "Not found" });

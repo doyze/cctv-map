@@ -22,6 +22,27 @@
             }
             .nav-link:hover { background: #f5f5f5; }
 
+            /* Log panel */
+            .log-panel {
+                position: fixed; top: 48px; right: 12px; z-index: 1000;
+                width: 360px; max-height: 340px;
+                background: rgba(0,0,0,.25);
+                border-radius: 6px;
+                overflow-y: auto;
+                padding: 6px 10px;
+                font-family: 'SF Mono', 'Consolas', monospace;
+                font-size: 11px;
+                line-height: 1.5;
+                color: #000;
+                pointer-events: auto;
+                scrollbar-width: none;
+            }
+            .log-panel::-webkit-scrollbar { display: none; }
+            .log-line { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+            .log-line .log-ts { color: rgba(0,0,0,.5); margin-right: 6px; }
+            .log-line.error { color: #c00; }
+            .log-empty { color: rgba(0,0,0,.4); font-style: italic; }
+
             /* Dark themed Leaflet popup */
             .dark-popup .leaflet-popup-content-wrapper {
                 background: #1a1a1a;
@@ -102,6 +123,7 @@
     </head>
     <body>
         <a href="/admin.html" class="nav-link">Admin</a>
+        <div class="log-panel" id="log-panel"><div class="log-empty">Loading logs...</div></div>
         <div id="map"></div>
 
         <script>
@@ -242,6 +264,15 @@
                 var marker = e.popup._source;
                 var url = marker._streamUrl;
 
+                // Log view event to backend
+                if (marker._camId) {
+                    fetch('/api/cameras/view', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ id: marker._camId, name: marker._camName })
+                    }).catch(function(){});
+                }
+
                 // Update popup status from stored status
                 if (marker._status) {
                     var dotEl = e.popup.getElement().querySelector('.status-dot');
@@ -299,6 +330,32 @@
                     currentPopupMarker = null;
                 }
             });
+
+            // --- Log panel: poll backend logs ---
+            function fetchLogs() {
+                fetch('/api/logs?n=20')
+                    .then(function(r) { return r.json(); })
+                    .then(function(logs) {
+                        var panel = document.getElementById('log-panel');
+                        if (!logs.length) {
+                            panel.innerHTML = '<div class="log-empty">No logs yet</div>';
+                            return;
+                        }
+                        var html = '';
+                        logs.forEach(function(l) {
+                            var cls = l.level === 'error' ? ' error' : '';
+                            html += '<div class="log-line' + cls + '">' +
+                                '<span class="log-ts">' + l.ts + '</span>' +
+                                l.msg.replace(/</g, '&lt;') +
+                                '</div>';
+                        });
+                        panel.innerHTML = html;
+                        panel.scrollTop = panel.scrollHeight;
+                    })
+                    .catch(function() {});
+            }
+            fetchLogs();
+            setInterval(fetchLogs, 3000);
         </script>
     </body>
 </html>
