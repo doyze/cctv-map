@@ -5,6 +5,7 @@
         <title>CCTV Map - Udon Thani</title>
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.7/dist/hls.min.js"></script>
         <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
         <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
         <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
@@ -21,76 +22,80 @@
             }
             .nav-link:hover { background: #f5f5f5; }
 
-            /* Video Preview Modal (same as admin) */
-            .preview-overlay {
-                display: none;
-                position: fixed; inset: 0;
-                background: rgba(0,0,0,.6);
-                z-index: 2000;
-                justify-content: center;
-                align-items: center;
-            }
-            .preview-overlay.active { display: flex; }
-            .preview-box {
-                background: #111;
-                border-radius: 12px;
-                width: 90%;
-                max-width: 640px;
-                overflow: hidden;
-                box-shadow: 0 20px 60px rgba(0,0,0,.5);
-            }
-            .preview-header {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                padding: 14px 18px;
+            /* Dark themed Leaflet popup */
+            .dark-popup .leaflet-popup-content-wrapper {
                 background: #1a1a1a;
-            }
-            .preview-header h3 {
                 color: #fff;
-                font-size: 14px;
-                font-weight: 500;
+                border-radius: 10px;
+                box-shadow: 0 8px 30px rgba(0,0,0,.5);
+                padding: 0;
+            }
+            .dark-popup .leaflet-popup-content {
                 margin: 0;
+                min-width: 340px;
+            }
+            .dark-popup .leaflet-popup-tip {
+                background: #1a1a1a;
+                box-shadow: 0 4px 10px rgba(0,0,0,.3);
+            }
+            .dark-popup .leaflet-popup-close-button {
+                color: #888;
+                font-size: 20px;
+                top: 8px;
+                right: 10px;
+                width: 22px;
+                height: 22px;
+                transition: color .15s;
+            }
+            .dark-popup .leaflet-popup-close-button:hover {
+                color: #fff;
+            }
+
+            /* Popup content styling */
+            .cam-header {
                 display: flex;
                 align-items: center;
                 gap: 8px;
+                padding: 12px 14px;
+                background: #222;
+                border-radius: 10px 10px 0 0;
             }
-            .preview-header .preview-status {
+            .cam-header .status-dot {
                 display: inline-block;
                 width: 8px; height: 8px;
                 border-radius: 50%;
+                flex-shrink: 0;
             }
-            .preview-header .preview-status.online { background: #4caf50; }
-            .preview-header .preview-status.offline { background: #e53935; }
-            .preview-close {
-                background: none;
-                border: none;
-                color: #888;
-                font-size: 22px;
-                cursor: pointer;
-                padding: 0 4px;
-                line-height: 1;
-                transition: color .15s;
+            .cam-header .status-dot.online { background: #4caf50; }
+            .cam-header .status-dot.offline { background: #e53935; }
+            .cam-header .cam-name {
+                font-size: 13px;
+                font-weight: 500;
+                color: #fff;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
-            .preview-close:hover { color: #fff; }
-            .preview-video {
+            .cam-video-wrap {
                 position: relative;
                 width: 100%;
                 padding-top: 56.25%; /* 16:9 */
                 background: #000;
+                border-radius: 0 0 10px 10px;
+                overflow: hidden;
             }
-            .preview-video video {
+            .cam-video-wrap video {
                 position: absolute;
                 top: 0; left: 0;
                 width: 100%; height: 100%;
                 object-fit: contain;
             }
-            .preview-video .preview-msg {
+            .cam-video-wrap .cam-msg {
                 position: absolute;
                 top: 50%; left: 50%;
                 transform: translate(-50%, -50%);
-                color: #888;
-                font-size: 14px;
+                color: #666;
+                font-size: 13px;
                 text-align: center;
             }
         </style>
@@ -99,24 +104,6 @@
         <a href="/admin.html" class="nav-link">Admin</a>
         <div id="map"></div>
 
-        <!-- Video Preview Modal -->
-        <div class="preview-overlay" id="preview-modal">
-            <div class="preview-box">
-                <div class="preview-header">
-                    <h3>
-                        <span class="preview-status" id="preview-status-dot"></span>
-                        <span id="preview-name"></span>
-                    </h3>
-                    <button class="preview-close" onclick="closePreview()">&times;</button>
-                </div>
-                <div class="preview-video">
-                    <video id="preview-video" autoplay muted playsinline></video>
-                    <div class="preview-msg" id="preview-msg"></div>
-                </div>
-            </div>
-        </div>
-
-        <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.7/dist/hls.min.js"></script>
         <script>
             var map = L.map('map').setView([17.4046, 102.7943], 14);
 
@@ -138,7 +125,7 @@
                 shadowAnchor: [12, 41]
             });
 
-            // Default blue icon (for restoring from red)
+            // Default blue icon
             var blueIcon = L.icon({
                 iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
                 iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
@@ -194,6 +181,19 @@
 
             map.on('moveend', debouncedCheck);
 
+            // --- Build popup HTML ---
+            function buildPopupHtml(cam) {
+                var statusClass = cam.status === 'online' ? 'online' : 'offline';
+                return '<div class="cam-header">' +
+                           '<span class="status-dot ' + statusClass + '"></span>' +
+                           '<span class="cam-name">' + cam.name + '</span>' +
+                       '</div>' +
+                       '<div class="cam-video-wrap">' +
+                           '<video id="cam-video" autoplay muted playsinline></video>' +
+                           '<div class="cam-msg" id="cam-msg"></div>' +
+                       '</div>';
+            }
+
             // --- Load cameras ---
             fetch('/api/cameras')
                 .then(function(r) { return r.json(); })
@@ -204,15 +204,17 @@
 
                         var opts = cam.status === 'offline' ? { icon: redIcon } : {};
                         var m = L.marker([cam.lat, cam.lon], opts);
+
+                        m.bindPopup(buildPopupHtml(cam), {
+                            maxWidth: 400,
+                            minWidth: 340,
+                            className: 'dark-popup'
+                        });
+
                         m._streamUrl = cam.stream_url;
                         m._camId = cam.id;
                         m._camName = cam.name;
                         m._status = cam.status;
-
-                        m.on('click', function() {
-                            openPreview(this);
-                        });
-
                         markers.addLayer(m);
                         allMarkers.push(m);
                     });
@@ -222,31 +224,29 @@
                     checkVisibleMarkers();
                 });
 
-            // --- Video Preview (same style as admin) ---
-            function openPreview(marker) {
-                var name = marker._camName || 'Camera';
-                var status = marker._status || 'offline';
+            // --- Popup open: update status + play HLS ---
+            map.on('popupopen', function(e) {
+                var marker = e.popup._source;
                 var url = marker._streamUrl;
 
-                document.getElementById('preview-name').textContent = name;
-                var dot = document.getElementById('preview-status-dot');
-                dot.className = 'preview-status ' + status;
+                // Update popup status from stored status
+                if (marker._status) {
+                    var dotEl = e.popup.getElement().querySelector('.status-dot');
+                    if (dotEl) {
+                        dotEl.className = 'status-dot ' + marker._status;
+                    }
+                }
 
-                var video = document.getElementById('preview-video');
-                var msg = document.getElementById('preview-msg');
+                var video = document.getElementById('cam-video');
+                var msg = document.getElementById('cam-msg');
+                if (!video) return;
+
                 msg.textContent = '';
                 video.style.display = 'block';
-
-                // Cleanup previous
-                if (previewHls) { previewHls.destroy(); previewHls = null; }
-                video.pause();
-                video.removeAttribute('src');
-                video.load();
 
                 if (!url) {
                     video.style.display = 'none';
                     msg.textContent = 'ไม่มี Stream URL';
-                    document.getElementById('preview-modal').classList.add('active');
                     return;
                 }
 
@@ -273,27 +273,20 @@
                         msg.textContent = 'ไม่สามารถโหลดสตรีมได้';
                     });
                 }
-
-                document.getElementById('preview-modal').classList.add('active');
-            }
-
-            function closePreview() {
-                document.getElementById('preview-modal').classList.remove('active');
-                var video = document.getElementById('preview-video');
-                if (previewHls) { previewHls.destroy(); previewHls = null; }
-                video.pause();
-                video.removeAttribute('src');
-                video.load();
-            }
-
-            // Close preview on overlay click
-            document.getElementById('preview-modal').addEventListener('click', function(e) {
-                if (e.target === this) closePreview();
             });
 
-            // Close preview on Escape key
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') closePreview();
+            // --- Popup close: cleanup HLS ---
+            map.on('popupclose', function(e) {
+                if (previewHls) {
+                    previewHls.destroy();
+                    previewHls = null;
+                }
+                var video = document.getElementById('cam-video');
+                if (video) {
+                    video.pause();
+                    video.removeAttribute('src');
+                    video.load();
+                }
             });
         </script>
     </body>
