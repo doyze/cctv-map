@@ -1,277 +1,103 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-S95TT7F01F"></script>
-        <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-S95TT7F01F');
-        </script>
-        <!-- End of Global site tag (gtag.js) - Google Analytics -->
-        
-        <title>OpenTrafficCamMap</title>
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-        <script src="https://leafletjs.com/examples/choropleth/us-states.js"></script>
+        <meta charset="utf-8">
+        <title>CCTV Map - Udon Thani</title>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/hls.js@latest/dist/hls.min.js"></script>
-        <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
-        <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
-        <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
-        <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
         <style>
-            body {
-                padding: 0;
-                margin: 0;
+            * { box-sizing: border-box; }
+            body { padding: 0; margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+            html, body, #map { height: 100%; width: 100%; }
+            .cam-popup { min-width: 340px; }
+            .cam-popup .cam-name { font-weight: 600; margin-bottom: 4px; font-size: 14px; }
+            .cam-popup .cam-status { font-size: 12px; margin-bottom: 6px; }
+            .cam-popup .cam-status.online { color: #2e7d32; }
+            .cam-popup .cam-status.offline { color: #c62828; }
+            .nav-link {
+                position: fixed; top: 12px; right: 12px; z-index: 1000;
+                background: #fff; color: #333; text-decoration: none;
+                padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: 500;
+                box-shadow: 0 1px 4px rgba(0,0,0,.15);
+                transition: background .15s;
             }
-            html, body, #map {
-                height: 100%;
-                width: 100%;
-            }
-            .leaflet-tooltip-pane .text {
-                color: black; 
-                font-weight: bold;
-                background: transparent;
-                border:0;
-                box-shadow: none;
-                font-size:2em;
-            }
+            .nav-link:hover { background: #f5f5f5; }
         </style>
-        <script>
-            if(location.protocol !== 'http:') {
-                alert("It seems you are attempting to force SSL/TLS.  HTTPS is not used for this site because it can cause issues with some of the traffic camera \
-                providers.  Until they all support HTTPS we won't be able to.  You can continue, but some streams may not work properly.");
-            }
-        </script>
     </head>
     <body>
+        <a href="/admin.html" class="nav-link">Admin</a>
         <div id="map"></div>
         <script>
-            var map = L.map('map', {
-                worldCopyJump: true
-            }).setView([39, -100], 4);
+            var map = L.map('map').setView([17.4046, 102.7943], 14);
 
-            L.easyButton({
-                states: [{
-                    stateName: 'cluster-map',
-                    icon: '<i class="material-icons" style="font-size:18px; padding-bottom: 3px; display: inline-flex; vertical-align: middle;">border_all</i>',
-                    title: 'Change to Classic Heat Map Mode',
-                    onClick: function(control) {
-                        map.eachLayer(function (layer) {
-                            map.removeLayer(layer);
-                        });
-                        DrawHeatMap();
-                        control.state('heat-map');
-                    }
-                }, {
-                    stateName: 'heat-map',
-                    icon: '<i class="material-icons" style="font-size:18px; padding-bottom: 3px; display: inline-flex; vertical-align: middle;">bubble_chart</i>',
-                    title: 'Change to Cluster Map Mode',
-                    onClick: function(control) {
-                        map.eachLayer(function (layer) {
-                            map.removeLayer(layer);
-                        });
-                        DrawClusterMap();
-                        control.state('cluster-map');
-                    }
-                }]
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
 
-            var cameras;
+            var hls = null;
 
-            fetch('./cameras/USA.json').then((response) => {return response.json();}).then((data) => {
-                cameras = data;
-                DrawClusterMap();
+            // Red icon for offline cameras
+            var redIcon = L.icon({
+                iconUrl: 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 41"><path d="M12.5 0C5.6 0 0 5.6 0 12.5 0 21.9 12.5 41 12.5 41S25 21.9 25 12.5C25 5.6 19.4 0 12.5 0z" fill="#e53935"/><circle cx="12.5" cy="12.5" r="5.5" fill="#fff"/></svg>'),
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+                shadowSize: [41, 41],
+                shadowAnchor: [12, 41]
             });
 
-            var hls;
-            function GetMarker(cam, county){
-                let m = L.marker([cam.latitude, cam.longitude]);
-                var cam_view = (() => {
-                    if(cam.url){
-						switch( cam.format ) {
-							case "IMAGE_STREAM":
-								return `<img src="${cam.url}" width="320" height="240" alt="Camera Stream">`;
-							case "M3U8":
-							case "M3U9":
-								return '<video id="video" width="320" height="240" autoplay muted></video>';
-							case "UNIQUE_TEXASDOT":
-								return `The Texas DOT has a bizarre system making implementation of the camera on this site very difficult.
-									So, this should redirect you to a map of Texas by the state DOT that does work: <a href="https://its.txdot.gov/ITS_WEB/FrontEnd/default.html?r=TYL&p=Tyler&t=map">Link</a>`;
-							case "UNIQUE_COLORADODOT":
-								return `The Colorado DOT for an unknowable reason implements <a href="https://en.wikipedia.org/wiki/Digital_rights_management">DRM</a> making streaming on this site very difficult.
-									So, this should redirect you to a map of Colorado by the state DOT that does work: <a href="https://www.cotrip.org/map.htm#/default">Link</a>`;
-							default:
-								return "An error has occurred";
-						}
-                    } else {
-                        return "No Image";
-                    }
-                })();
-                m = m.bindPopup(cam.description + '\n' + cam_view);
-                if(cam.format === "M3U8" || cam.format === "M3U9"){
-                    m._url = cam.url
-                }
-                return m;
-            }
+            fetch('/api/cameras')
+                .then(function(r) { return r.json(); })
+                .then(function(cameras) {
+                    var markers = L.markerClusterGroup({ maxClusterRadius: 40 });
+                    cameras.forEach(function(cam) {
+                        if (!cam.lat || !cam.lon) return;
 
-            function DrawClusterMap(){
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                }).addTo(map);
-                var markers = L.markerClusterGroup({
-                    maxClusterRadius: 40,
-                    chunkedLoading: true
+                        var statusClass = cam.status === 'online' ? 'online' : 'offline';
+                        var statusText = cam.status === 'online' ? 'Online' : 'Offline';
+                        var popupHtml =
+                            '<div class="cam-popup">' +
+                                '<div class="cam-name">' + cam.name + '</div>' +
+                                '<div class="cam-status ' + statusClass + '">' + statusText + '</div>' +
+                                '<video id="video" width="320" height="240" autoplay muted></video>' +
+                            '</div>';
+
+                        var opts = cam.status === 'offline' ? { icon: redIcon } : {};
+                        var m = L.marker([cam.lat, cam.lon], opts);
+                        m.bindPopup(popupHtml, { maxWidth: 360 });
+                        m._streamUrl = cam.stream_url;
+                        markers.addLayer(m);
+                    });
+                    map.addLayer(markers);
                 });
-                for(var state in cameras){
-                    let count = 0;
-                    for(var county in cameras[state]){
-                        for(var camera in cameras[state][county]){
-                            var cam = cameras[state][county][camera];
-                            if(cam.latitude !== undefined && cam.longitude !== undefined){
-                                markers.addLayer(GetMarker(cam, county));
-                            }    
-                        }
+
+            map.on('popupopen', function(e) {
+                var url = e.popup._source._streamUrl;
+                if (url) {
+                    var video = document.getElementById('video');
+                    if (Hls.isSupported()) {
+                        hls = new Hls();
+                        hls.loadSource(url);
+                        hls.attachMedia(video);
+                    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                        video.src = url;
                     }
-                }
-                map.addLayer(markers);
-            }
-
-            function DrawHeatMap(){
-                function DrawCams(state){
-                    var layer = [];
-                    for(var county in cameras[state]){
-                        for(var i in cameras[state][county]){
-                            let cam = cameras[state][county][i];
-                            if(cam.latitude && cam.longitude){
-                                let m = GetMarker(cam, county)
-                                    .openPopup();
-                                layer.push(m);
-                            }
-                        }
-                    }
-                    return layer;
-                }
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                }).addTo(map);
-                var counts = new Map();
-                var highest_count = 0;
-                for(var state in cameras){
-                    let count = 0;
-                    for(var county in cameras[state]){
-                        for(var camera in cameras[state][county]){
-                            count++;
-                        }
-                    }
-                    highest_count = (count > highest_count) ? count : highest_count;
-                    counts.set(state, count);
-                }
-                function getColor(state){
-                    var color = 0
-                    if(counts.has(state)){
-                        color = Math.floor((counts.get(state)/highest_count)*155) + 100;
-                    }
-                    return `#${color.toString(16)}0000`;
-                }
-                function style(feature){
-                    return {
-                        fillColor: getColor(feature.properties.name),
-                        weight: 2,
-                        opacity: 1,
-                        color: 'white',
-                        dashArray: '3',
-                        fillOpacity: 0.7
-                    };
-                }
-
-                function highlightFeature(e) {
-                    var layer = e.target;
-
-                    layer.setStyle({
-                        weight: 5,
-                        color: '#666',
-                        dashArray: '',
-                        fillOpacity: 0.7
-                    });
-
-                    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-                        layer.bringToFront();
-                    }
-                }
-
-                function resetHighlight(e) {
-                    geojson.resetStyle(e.target);
-                }
-
-                var camera_layer;
-                var tooltips = new Map();
-                function onClick(e) {
-                    (camera_layer) ? map.removeLayer(camera_layer) : null;
-                    var tooltip = tooltips.get(e.target.feature.properties.name);
-                    if(tooltip){
-                        map.removeLayer(tooltip);
-                    } else {
-                        tooltip = L.tooltip({
-                            permanent: true,
-                            direction: 'center',
-                            className: 'text',
-                            interactive: true
-                        });
-                        tooltip.setContent((counts.get(e.target.feature.properties.name)) ? counts.get(e.target.feature.properties.name) + '' : '');
-                        tooltip.setLatLng(e.target.layer.getBounds().getCenter());
-                        tooltip.addTo(map);
-                        tooltips.set(e.target.feature.properties.name, tooltip);
-                    }
-                    tooltip.toggleTooltip();
-                    camera_layer = L.layerGroup(DrawCams(e.target.feature.properties.name));
-                    map.addLayer(camera_layer);
-                }
-
-                
-                function listener(feature, layer) {
-                    var tooltip = L.tooltip({
-                        permanent: true,
-                        direction: 'center',
-                        className: 'text',
-                        interactive: true
-                    });
-                    tooltip.setContent((counts.get(feature.properties.name)) ? counts.get(feature.properties.name) + '' : '');
-                    tooltip.setLatLng(layer.getBounds().getCenter());
-                    tooltip.addTo(map);
-                    tooltips.set(feature.properties.name, tooltip);
-                    layer.on({
-                        mouseover: highlightFeature,
-                        mouseout: resetHighlight,
-                        click: onClick
-                    });
-                }
-                
-                var geojson = L.geoJson(statesData, {style: style, onEachFeature: listener}).addTo(map);
-            }
-
-            map.on('popupopen', (e) => {
-                if(e.popup._source._url){
-                    hls = new Hls();
-                    let video = document.getElementById('video');
-                    hls.loadSource(e.popup._source._url);
-                    hls.attachMedia(video);
                 }
             });
 
-            map.on('popupclose', (e) => {
-                if(e.popup._source._url){
-                    let video = document.getElementById('video');
-                    hls.detachMedia();
+            map.on('popupclose', function(e) {
+                if (hls) {
                     hls.destroy();
-                    video.remove();
+                    hls = null;
                 }
+                var video = document.getElementById('video');
+                if (video) video.remove();
             });
-
         </script>
     </body>
 </html>

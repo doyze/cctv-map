@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CCTV Admin</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #fafafa;
+            color: #222;
+            line-height: 1.5;
+        }
+
+        /* Header */
+        header {
+            background: #fff;
+            border-bottom: 1px solid #e8e8e8;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        header h1 { font-size: 18px; font-weight: 600; }
+        header nav a {
+            color: #555;
+            text-decoration: none;
+            font-size: 13px;
+            margin-left: 16px;
+            transition: color .15s;
+        }
+        header nav a:hover { color: #000; }
+
+        /* Container */
+        .container { max-width: 960px; margin: 0 auto; padding: 24px 16px; }
+
+        /* Toolbar */
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        .toolbar .count { font-size: 13px; color: #888; }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background: #fff;
+            color: #333;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all .15s;
+        }
+        .btn:hover { background: #f5f5f5; border-color: #ccc; }
+        .btn-primary { background: #222; color: #fff; border-color: #222; }
+        .btn-primary:hover { background: #444; border-color: #444; }
+        .btn-danger { color: #c62828; }
+        .btn-danger:hover { background: #fef2f2; border-color: #e57373; }
+        .btn-sm { padding: 4px 10px; font-size: 12px; }
+
+        /* Table */
+        table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+        th { text-align: left; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .5px; color: #888; padding: 12px 14px; border-bottom: 1px solid #eee; }
+        td { padding: 10px 14px; border-bottom: 1px solid #f3f3f3; font-size: 13px; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: #fafafa; }
+
+        .status-dot {
+            display: inline-block;
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            margin-right: 6px;
+        }
+        .status-dot.online { background: #4caf50; }
+        .status-dot.offline { background: #e53935; }
+
+        .actions { display: flex; gap: 6px; }
+        .coords { font-family: 'SF Mono', 'Consolas', monospace; font-size: 12px; color: #666; }
+        .url-cell { max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; color: #888; }
+
+        .status-cell {
+            cursor: pointer;
+            user-select: none;
+            transition: opacity .15s;
+        }
+        .status-cell:hover { opacity: .7; }
+
+        /* Video Preview Modal */
+        .preview-overlay {
+            display: none;
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,.6);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        .preview-overlay.active { display: flex; }
+        .preview-box {
+            background: #111;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 640px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,.5);
+        }
+        .preview-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 18px;
+            background: #1a1a1a;
+        }
+        .preview-header h3 {
+            color: #fff;
+            font-size: 14px;
+            font-weight: 500;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .preview-header .preview-status {
+            display: inline-block;
+            width: 8px; height: 8px;
+            border-radius: 50%;
+        }
+        .preview-header .preview-status.online { background: #4caf50; }
+        .preview-header .preview-status.offline { background: #e53935; }
+        .preview-close {
+            background: none;
+            border: none;
+            color: #888;
+            font-size: 22px;
+            cursor: pointer;
+            padding: 0 4px;
+            line-height: 1;
+            transition: color .15s;
+        }
+        .preview-close:hover { color: #fff; }
+        .preview-video {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 */
+            background: #000;
+        }
+        .preview-video video {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: contain;
+        }
+        .preview-video .preview-msg {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            color: #888;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,.3);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-overlay.active { display: flex; }
+
+        .modal {
+            background: #fff;
+            border-radius: 12px;
+            padding: 28px;
+            width: 100%;
+            max-width: 480px;
+            box-shadow: 0 20px 60px rgba(0,0,0,.15);
+        }
+        .modal h2 { font-size: 16px; font-weight: 600; margin-bottom: 20px; }
+
+        .field { margin-bottom: 14px; }
+        .field label { display: block; font-size: 12px; font-weight: 500; color: #666; margin-bottom: 4px; }
+        .field input, .field select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+            outline: none;
+            transition: border-color .15s;
+        }
+        .field input:focus, .field select:focus { border-color: #999; }
+        .field-row { display: flex; gap: 12px; }
+        .field-row .field { flex: 1; }
+
+        .modal-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 20px; }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
+            margin-top: 16px;
+        }
+        .pagination button {
+            min-width: 34px; height: 34px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background: #fff;
+            color: #333;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all .15s;
+        }
+        .pagination button:hover { background: #f5f5f5; border-color: #ccc; }
+        .pagination button.active { background: #222; color: #fff; border-color: #222; }
+        .pagination button:disabled { opacity: .35; cursor: default; }
+
+        /* Dashboard */
+        .dashboard {
+            display: flex;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+        .dash-card {
+            flex: 1;
+            background: #fff;
+            border-radius: 10px;
+            padding: 18px 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,.06);
+            border-left: 4px solid #ddd;
+        }
+        .dash-card.total  { border-left-color: #333; }
+        .dash-card.online { border-left-color: #4caf50; }
+        .dash-card.offline { border-left-color: #e53935; }
+        .dash-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            color: #999;
+            margin-bottom: 4px;
+        }
+        .dash-value {
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        .dash-card.total .dash-value  { color: #333; }
+        .dash-card.online .dash-value { color: #4caf50; }
+        .dash-card.offline .dash-value { color: #e53935; }
+        .dash-pct {
+            font-size: 11px;
+            color: #aaa;
+            margin-top: 2px;
+        }
+
+        /* Empty state */
+        .empty { text-align: center; padding: 48px; color: #aaa; font-size: 14px; }
+
+        /* Login */
+        .login-wrap {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #fafafa;
+        }
+        .login-box {
+            background: #fff;
+            border-radius: 12px;
+            padding: 36px;
+            width: 100%;
+            max-width: 360px;
+            box-shadow: 0 2px 12px rgba(0,0,0,.08);
+            text-align: center;
+        }
+        .login-box h2 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+        .login-box p { font-size: 13px; color: #888; margin-bottom: 20px; }
+        .login-box input {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+            outline: none;
+            text-align: center;
+            letter-spacing: 2px;
+            margin-bottom: 14px;
+            transition: border-color .15s;
+        }
+        .login-box input:focus { border-color: #999; }
+        .login-box .btn { width: 100%; justify-content: center; }
+        .login-error { color: #c62828; font-size: 12px; margin-bottom: 10px; display: none; }
+    </style>
+</head>
+<body>
+
+<!-- Login Screen -->
+<div class="login-wrap" id="login-screen">
+    <div class="login-box">
+        <h2>CCTV Admin</h2>
+        <p>กรุณาใส่ Passcode เพื่อเข้าใช้งาน</p>
+        <div class="login-error" id="login-error">Passcode ไม่ถูกต้อง</div>
+        <form onsubmit="doLogin(event)">
+            <input type="password" id="login-passcode" placeholder="Passcode" autofocus>
+            <button type="submit" class="btn btn-primary">เข้าสู่ระบบ</button>
+        </form>
+    </div>
+</div>
+
+<!-- Main App (hidden until login) -->
+<div id="app" style="display:none">
+<header>
+    <h1>CCTV Admin</h1>
+    <nav>
+        <a href="/">Map</a>
+        <a href="#" onclick="logout()" style="color:#c62828">ออกจากระบบ</a>
+    </nav>
+</header>
+
+<div class="container">
+    <div class="dashboard" id="dashboard">
+        <div class="dash-card total">
+            <div class="dash-label">กล้องทั้งหมด</div>
+            <div class="dash-value" id="dash-total">-</div>
+        </div>
+        <div class="dash-card online">
+            <div class="dash-label">ออนไลน์</div>
+            <div class="dash-value" id="dash-online">-</div>
+            <div class="dash-pct" id="dash-online-pct"></div>
+        </div>
+        <div class="dash-card offline">
+            <div class="dash-label">ออฟไลน์</div>
+            <div class="dash-value" id="dash-offline">-</div>
+            <div class="dash-pct" id="dash-offline-pct"></div>
+        </div>
+    </div>
+
+    <div class="toolbar">
+        <span class="count" id="count"></span>
+        <button class="btn btn-primary" onclick="openModal()">+ เพิ่มกล้อง</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>ชื่อ</th>
+                <th>สถานะ</th>
+                <th>พิกัด</th>
+                <th>Stream URL</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+    </table>
+    <div class="empty" id="empty" style="display:none">ยังไม่มีกล้อง</div>
+    <div class="pagination" id="pagination"></div>
+</div>
+
+</div><!-- end #app -->
+
+<!-- Modal -->
+<div class="modal-overlay" id="modal">
+    <div class="modal">
+        <h2 id="modal-title">เพิ่มกล้อง</h2>
+        <form id="form" onsubmit="save(event)">
+            <input type="hidden" id="f-id">
+            <div class="field">
+                <label>ชื่อกล้อง</label>
+                <input type="text" id="f-name" required placeholder="เช่น แยกเซ็นทรัล">
+            </div>
+            <div class="field">
+                <label>สถานะ</label>
+                <select id="f-status">
+                    <option value="online">Online</option>
+                    <option value="offline">Offline</option>
+                </select>
+            </div>
+            <div class="field-row">
+                <div class="field">
+                    <label>ละติจูด</label>
+                    <input type="number" step="any" id="f-lat" required placeholder="17.4046">
+                </div>
+                <div class="field">
+                    <label>ลองจิจูด</label>
+                    <input type="number" step="any" id="f-lon" required placeholder="102.7943">
+                </div>
+            </div>
+            <div class="field">
+                <label>Stream URL</label>
+                <input type="url" id="f-url" required placeholder="https://...m3u8">
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="btn" onclick="closeModal()">ยกเลิก</button>
+                <button type="submit" class="btn btn-primary">บันทึก</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Video Preview Modal -->
+<div class="preview-overlay" id="preview-modal">
+    <div class="preview-box">
+        <div class="preview-header">
+            <h3>
+                <span class="preview-status" id="preview-status-dot"></span>
+                <span id="preview-name"></span>
+            </h3>
+            <button class="preview-close" onclick="closePreview()">&times;</button>
+        </div>
+        <div class="preview-video">
+            <video id="preview-video" autoplay muted playsinline></video>
+            <div class="preview-msg" id="preview-msg"></div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.7/dist/hls.min.js"></script>
+<script>
+const API = '/api/cameras';
+const PER_PAGE = 30;
+let cameras = [];
+let currentPage = 1;
+let token = sessionStorage.getItem('admin_token') || '';
+
+// --- Login ---
+async function doLogin(e) {
+    e.preventDefault();
+    var passcode = document.getElementById('login-passcode').value;
+    var res = await fetch('/api/login', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ passcode: passcode })
+    });
+    if (res.ok) {
+        token = passcode;
+        sessionStorage.setItem('admin_token', token);
+        showApp();
+    } else {
+        document.getElementById('login-error').style.display = 'block';
+        document.getElementById('login-passcode').select();
+    }
+}
+
+function logout() {
+    token = '';
+    sessionStorage.removeItem('admin_token');
+    document.getElementById('app').style.display = 'none';
+    document.getElementById('login-screen').style.display = 'flex';
+    document.getElementById('login-passcode').value = '';
+    document.getElementById('login-error').style.display = 'none';
+}
+
+function showApp() {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    load();
+    checkStatus();
+}
+
+async function checkStatus() {
+    document.getElementById('count').textContent = 'กำลังตรวจสอบสถานะกล้อง...';
+    try {
+        await fetch('/api/cameras/check-status', {
+            method: 'POST',
+            headers: authHeaders()
+        });
+        await load();
+    } catch {}
+}
+
+function authHeaders() {
+    return { 'Content-Type': 'application/json', 'X-Admin-Token': token };
+}
+
+// Auto-login if token exists
+if (token) {
+    fetch('/api/login', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ passcode: token })
+    }).then(function(r) {
+        if (r.ok) showApp();
+        else logout();
+    });
+}
+
+async function load() {
+    const res = await fetch(API);
+    cameras = await res.json();
+    render();
+}
+
+function renderDashboard() {
+    var total = cameras.length;
+    var onlineCount = cameras.filter(function(c) { return c.status === 'online'; }).length;
+    var offlineCount = total - onlineCount;
+
+    document.getElementById('dash-total').textContent = total;
+    document.getElementById('dash-online').textContent = onlineCount;
+    document.getElementById('dash-offline').textContent = offlineCount;
+
+    if (total > 0) {
+        document.getElementById('dash-online-pct').textContent = Math.round(onlineCount / total * 100) + '%';
+        document.getElementById('dash-offline-pct').textContent = Math.round(offlineCount / total * 100) + '%';
+    } else {
+        document.getElementById('dash-online-pct').textContent = '';
+        document.getElementById('dash-offline-pct').textContent = '';
+    }
+}
+
+function render() {
+    const tbody = document.getElementById('tbody');
+    const empty = document.getElementById('empty');
+    const totalPages = Math.max(1, Math.ceil(cameras.length / PER_PAGE));
+
+    if (currentPage > totalPages) currentPage = totalPages;
+
+    renderDashboard();
+    document.getElementById('count').textContent = cameras.length + ' กล้อง';
+
+    if (cameras.length === 0) {
+        tbody.innerHTML = '';
+        empty.style.display = 'block';
+        document.getElementById('pagination').innerHTML = '';
+        return;
+    }
+    empty.style.display = 'none';
+
+    var start = (currentPage - 1) * PER_PAGE;
+    var page = cameras.slice(start, start + PER_PAGE);
+
+    tbody.innerHTML = page.map(function(c, i) {
+        return '<tr>' +
+            '<td>' + (start + i + 1) + '</td>' +
+            '<td>' + esc(c.name) + '</td>' +
+            '<td class="status-cell" onclick="openPreview(' + c.id + ')" title="คลิกเพื่อดูภาพ"><span class="status-dot ' + c.status + '"></span>' + c.status + '</td>' +
+            '<td class="coords">' + c.lat.toFixed(6) + ', ' + c.lon.toFixed(6) + '</td>' +
+            '<td class="url-cell" title="' + esc(c.stream_url) + '">' + esc(c.stream_url) + '</td>' +
+            '<td class="actions">' +
+                '<button class="btn btn-sm" onclick="edit(' + c.id + ')">แก้ไข</button>' +
+                '<button class="btn btn-sm btn-danger" onclick="del(' + c.id + ')">ลบ</button>' +
+            '</td>' +
+        '</tr>';
+    }).join('');
+
+    renderPagination(totalPages);
+}
+
+function renderPagination(totalPages) {
+    if (totalPages <= 1) {
+        document.getElementById('pagination').innerHTML = '';
+        return;
+    }
+    var html = '<button onclick="goPage(' + (currentPage - 1) + ')"' + (currentPage === 1 ? ' disabled' : '') + '>&lsaquo;</button>';
+    for (var p = 1; p <= totalPages; p++) {
+        html += '<button onclick="goPage(' + p + ')"' + (p === currentPage ? ' class="active"' : '') + '>' + p + '</button>';
+    }
+    html += '<button onclick="goPage(' + (currentPage + 1) + ')"' + (currentPage === totalPages ? ' disabled' : '') + '>&rsaquo;</button>';
+    document.getElementById('pagination').innerHTML = html;
+}
+
+function goPage(p) {
+    currentPage = p;
+    render();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function esc(s) {
+    var d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+}
+
+function openModal(cam) {
+    document.getElementById('modal-title').textContent = cam ? 'แก้ไขกล้อง' : 'เพิ่มกล้อง';
+    document.getElementById('f-id').value = cam ? cam.id : '';
+    document.getElementById('f-name').value = cam ? cam.name : '';
+    document.getElementById('f-status').value = cam ? cam.status : 'online';
+    document.getElementById('f-lat').value = cam ? cam.lat : '';
+    document.getElementById('f-lon').value = cam ? cam.lon : '';
+    document.getElementById('f-url').value = cam ? cam.stream_url : '';
+    document.getElementById('modal').classList.add('active');
+    document.getElementById('f-name').focus();
+}
+
+function closeModal() {
+    document.getElementById('modal').classList.remove('active');
+}
+
+function edit(id) {
+    var cam = cameras.find(function(c) { return c.id === id; });
+    if (cam) openModal(cam);
+}
+
+async function save(e) {
+    e.preventDefault();
+    var id = document.getElementById('f-id').value;
+    var body = {
+        name: document.getElementById('f-name').value,
+        status: document.getElementById('f-status').value,
+        lat: document.getElementById('f-lat').value,
+        lon: document.getElementById('f-lon').value,
+        stream_url: document.getElementById('f-url').value,
+    };
+
+    if (id) {
+        await fetch(API + '/' + id, { method: 'PUT', headers: authHeaders(), body: JSON.stringify(body) });
+    } else {
+        await fetch(API, { method: 'POST', headers: authHeaders(), body: JSON.stringify(body) });
+    }
+
+    closeModal();
+    load();
+}
+
+async function del(id) {
+    var cam = cameras.find(function(c) { return c.id === id; });
+    if (!confirm('ลบ "' + cam.name + '" ?')) return;
+    await fetch(API + '/' + id, { method: 'DELETE', headers: authHeaders() });
+    load();
+}
+
+// Close modal on overlay click
+document.getElementById('modal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+});
+
+// Close modal on Escape
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') { closeModal(); closePreview(); }
+});
+
+// --- Video Preview ---
+let previewHls = null;
+
+function openPreview(id) {
+    var cam = cameras.find(function(c) { return c.id === id; });
+    if (!cam) return;
+
+    document.getElementById('preview-name').textContent = cam.name;
+    var dot = document.getElementById('preview-status-dot');
+    dot.className = 'preview-status ' + cam.status;
+
+    var video = document.getElementById('preview-video');
+    var msg = document.getElementById('preview-msg');
+    msg.textContent = '';
+    video.style.display = 'block';
+
+    // Cleanup previous
+    if (previewHls) { previewHls.destroy(); previewHls = null; }
+    video.pause();
+    video.removeAttribute('src');
+    video.load();
+
+    var url = cam.stream_url;
+    if (!url) {
+        video.style.display = 'none';
+        msg.textContent = 'ไม่มี Stream URL';
+        document.getElementById('preview-modal').classList.add('active');
+        return;
+    }
+
+    if (url.includes('.m3u8') && Hls.isSupported()) {
+        previewHls = new Hls({ enableWorker: true, lowLatencyMode: true });
+        previewHls.loadSource(url);
+        previewHls.attachMedia(video);
+        previewHls.on(Hls.Events.MANIFEST_PARSED, function() {
+            video.play().catch(function(){});
+        });
+        previewHls.on(Hls.Events.ERROR, function(ev, data) {
+            if (data.fatal) {
+                video.style.display = 'none';
+                msg.textContent = 'ไม่สามารถโหลดสตรีมได้';
+            }
+        });
+    } else if (url.includes('.m3u8') && video.canPlayType('application/vnd.apple.mpegurl')) {
+        // Safari native HLS
+        video.src = url;
+        video.play().catch(function(){});
+    } else {
+        // Try direct video
+        video.src = url;
+        video.play().catch(function() {
+            video.style.display = 'none';
+            msg.textContent = 'ไม่สามารถโหลดสตรีมได้';
+        });
+    }
+
+    document.getElementById('preview-modal').classList.add('active');
+}
+
+function closePreview() {
+    document.getElementById('preview-modal').classList.remove('active');
+    var video = document.getElementById('preview-video');
+    if (previewHls) { previewHls.destroy(); previewHls = null; }
+    video.pause();
+    video.removeAttribute('src');
+    video.load();
+}
+
+// Close preview on overlay click
+document.getElementById('preview-modal').addEventListener('click', function(e) {
+    if (e.target === this) closePreview();
+});
+</script>
+
+</body>
+</html>

@@ -1,31 +1,16 @@
 {
-  "name": "opentrafficcammap",
-  "version": "0.5.0",
-  "description": "An open-source list of traffic cameras with live view and geodata",
-  "main": "index.mjs",
+  "name": "cctv-map",
+  "version": "1.0.0",
+  "description": "แผนที่กล้อง CCTV พร้อม Admin CRUD และ Live Stream",
+  "type": "module",
   "scripts": {
-    "start": "node index.mjs",
-    "test": "mocha",
-    "lint": "eslint \"**/*{.js,.cjs,.mjs}\"",
-    "fix-lint": "eslint \"**/*{.js,.cjs,.mjs}\" --fix"
+    "start": "node serve.mjs",
+    "init-db": "node init-db.mjs"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/AidanWelch/OpenTrafficCamMap.git"
+  "engines": {
+    "node": ">=18"
   },
-  "keywords": [
-    "traffic",
-    "camera"
-  ],
-  "author": "Aidan Welch",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/AidanWelch/OpenTrafficCamMap/issues"
-  },
-  "homepage": "https://github.com/AidanWelch/OpenTrafficCamMap#readme",
-  "devDependencies": {
-    "eslint": "^8.55.0",
-    "eslint-plugin-mocha": "^10.2.0",
-    "mocha": "^10.2.0"
+  "dependencies": {
+    "better-sqlite3": "^12.6.2"
   }
 }

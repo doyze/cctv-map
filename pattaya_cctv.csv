@@ -1,0 +1,401 @@
+﻿id,name,lat,lng,streamUrl
+CC-002,CC-002 จุดกลับรถโชคดีค้าไม้,12.946836,100.905282,https://stream1.ioc.pattaya.go.th/live/CC-002.m3u8
+CC-003,CC-003 สี่แยกเพนียดช้าง,12.947822,100.903535,https://stream1.ioc.pattaya.go.th/live/CC-003.m3u8
+CC-004,CC-004 ตลาดด้านในชุมชนวัดชัยมงคล 2,12.92328,100.87702,https://stream1.ioc.pattaya.go.th/live/CC-004.m3u8
+CC-005,CC-005 มอเตอร์เวย์ขาเข้าพัทยา กล้องตัวที่ 1,12.945237,100.9044,https://stream1.ioc.pattaya.go.th/live/CC-005.m3u8
+CC-009,CC-009 สี่แยกตันตรารักษ์,12.942811,100.901101,https://stream1.ioc.pattaya.go.th/live/CC-009.m3u8
+CC-012,CC-012 แยกมุมอร่อย (พัทยาเหนือ),12.9424467,100.8949882,https://stream1.ioc.pattaya.go.th/live/CC-012.m3u8
+CC-013,CC-013 สามแยกฮอลลีวูด ถนนเพ็ชรตระกูล,12.943075,100.891601,https://stream1.ioc.pattaya.go.th/live/CC-013.m3u8
+CC-014,CC-014 บริเวณวงเวียนปลาโลมา,12.950668,100.887542,https://stream1.ioc.pattaya.go.th/live/CC-014.m3u8
+CC-017,CC-017 บริเวณ ปากซอยบัวขาว,12.936432,100.887274,https://stream1.ioc.pattaya.go.th/live/CC-017.m3u8
+CC-018,CC-018 บริเวณ ปากซอยบัวขาว,12.936387,100.887187,https://stream1.ioc.pattaya.go.th/live/CC-018.m3u8
+CC-019,CC-019  บริเวณ ถนนพัทยาสายสอง,12.947851,100.888717,https://stream1.ioc.pattaya.go.th/live/CC-019.m3u8
+CC-021,CC-021  ปากซอย 3 ถนนสายชายหาด,12.945579,100.884919,https://stream1.ioc.pattaya.go.th/live/CC-021.m3u8
+CC-022,CC-022  บริเวณ แยกพัทยากลาง,12.934657,100.892314,https://stream1.ioc.pattaya.go.th/live/CC-022.m3u8
+CC-024,CC-024 ปากซอย 6/1 ถนนสายชายหาด,12.942627,100.884744,https://stream1.ioc.pattaya.go.th/live/CC-024.m3u8
+CC-028,CC-028 บริเวณ แยกพัทยากลาง – ถ.เฉลิมพระเกียรติ,12.934712,100.892191,https://stream1.ioc.pattaya.go.th/live/CC-028.m3u8
+CC-029,CC-029 กลางซอยพัทยากลาง 14 กล้องตัวที่ 1,12.937507,100.889404,https://stream1.ioc.pattaya.go.th/live/CC-029.m3u8
+CC-030,CC-030 กลางซอยพัทยากลาง 14 กล้องตัวที่ 2,12.93736,100.889358,https://stream1.ioc.pattaya.go.th/live/CC-030.m3u8
+CC-031,CC-031 แยกซอยพัทยากลาง 12 และซอยเฉลิมพระเกียรติ 9 กล้องตัวที่ 1,12.938325,100.890868,https://stream1.ioc.pattaya.go.th/live/CC-031.m3u8
+CC-032,CC-032 แยกซอยพัทยากลาง 12 และซอยเฉลิมพระเกียรติ 9 กล้องตัวที่ 2,12.938343,100.89101,https://stream1.ioc.pattaya.go.th/live/CC-032.m3u8
+CC-033,CC-033 ปากซอยเฉลิมพระเกียรติ 9,12.938087,100.893467,https://stream1.ioc.pattaya.go.th/live/CC-033.m3u8
+CC-036,CC-036 กลางซอยเพนียดช้าง 8 กล้องตัวที่ 2,12.939912,100.896606,https://stream1.ioc.pattaya.go.th/live/CC-036.m3u8
+CC-037,CC-037 ปากซอยเพนียดช้าง 9,12.936958,100.897416,https://stream1.ioc.pattaya.go.th/live/CC-037.m3u8
+CC-042,CC-042 ซอยเพนียดช้าง ปากซอยเพนียดช้าง 6 กล้องตัวที่ 2,12.939023,100.899666,https://stream1.ioc.pattaya.go.th/live/CC-042.m3u8
+CC-051,CC-051 TVA-081 แยกสนามกอล์ฟเลียบทางรถไฟ,12.93518,100.9068,https://stream1.ioc.pattaya.go.th/live/CC-051.m3u8
+CC-052,CC-052 แยกสนามกอล์ฟเลียบทางรถไฟ,12.935151,100.906884,https://stream1.ioc.pattaya.go.th/live/CC-052.m3u8
+CC-053,CC-053 แยกสนามกอล์ฟเลียบทางรถไฟ,12.93511,100.906817,https://stream1.ioc.pattaya.go.th/live/CC-053.m3u8
+CC-055,CC-055 TVA-083 แยกเนินพลับหวานเลียบทางรถไฟ,12.93199,100.9058,https://stream1.ioc.pattaya.go.th/live/CC-055.m3u8
+CC-056,CC-056 แยกเนินพลับหวานเลียบทางรถไฟ,12.932001,100.905819,https://stream1.ioc.pattaya.go.th/live/CC-056.m3u8
+CC-057,CC-057 เนินพลับหวาน,12.932114,100.905245,https://stream1.ioc.pattaya.go.th/live/CC-057.m3u8
+CC-064,CC-064 บริเวณ ถนนพัทยากลาง - ห้างสรรพสินค้า Power Buy,12.932576,100.898491,https://stream1.ioc.pattaya.go.th/live/CC-064.m3u8
+CC-065,CC-065 บริเวณ ถนนพัทยากลาง - ห้างสรรพสินค้า Power Buy,12.932386,100.898464,https://stream1.ioc.pattaya.go.th/live/CC-065.m3u8
+CC-188,CC-188 บริเวณ แยกพัทยากลางสาย 2,12.936668,100.88652,https://stream1.ioc.pattaya.go.th/live/CC-188.m3u8
+CC-189,CC-189 บริเวณ แยกพัทยากลางสาย 2,12.936579,100.886402,https://stream1.ioc.pattaya.go.th/live/CC-189.m3u8
+CC-308,CC-308 บริเวณ หน้าซอยพัทยาแลนด์ 2,12.927426,100.876706,https://stream1.ioc.pattaya.go.th/live/CC-308.m3u8
+CC-309,CC-309 บริเวณ ถนนพัทยาสายสอง –ตรงข้ามปากซอย 14,12.930258,100.881059,https://stream1.ioc.pattaya.go.th/live/CC-309.m3u8
+CC-311,CC-311 บริเวณ ถนนพัทยาสายสอง – ปากซอย 8,12.933993,100.884887,https://stream1.ioc.pattaya.go.th/live/CC-311.m3u8
+CC-312,CC-312 บริเวณ ถนนพัทยาสายสอง – ปากซอย 8,12.933991,100.8848,https://stream1.ioc.pattaya.go.th/live/CC-312.m3u8
+CC-313,CC-313 ซ.เฉลิมพระเกียรติ 19,12.932576,100.887097,https://stream1.ioc.pattaya.go.th/live/CC-313.m3u8
+CC-316,CC-316 ซอยเล้งกี่ตัดซอยบัวขาว,12.928757,100.884729,https://stream1.ioc.pattaya.go.th/live/CC-316.m3u8
+CC-319,CC-319 บริเวณ แยกพัทยาใต้ – ถ.เฉลิมพระเกียรติ,12.92361,100.882505,https://stream1.ioc.pattaya.go.th/live/CC-319.m3u8
+CC-333,CC-333 บริเวณ ถนนพัทยาใต้ – ซอย 16 (บงกช),12.92138,100.887355,https://stream1.ioc.pattaya.go.th/live/CC-333.m3u8
+CC-335,CC-335 บริเวณ ถนนพัทยาใต้ - ซอยอาดัม,12.920512,100.889184,https://stream1.ioc.pattaya.go.th/live/CC-335.m3u8
+CC-338,CC-338 แยกพัทยาใต้ซอย 1,12.919275,100.891885,https://stream1.ioc.pattaya.go.th/live/CC-338.m3u8
+CC-339,CC-339 บริเวณ ถนนพัทยากลางก่อนถึงแยกพัทยาใต้สุขุมวิท,12.917406,100.8955,https://stream1.ioc.pattaya.go.th/live/CC-339.m3u8
+CC-340,CC-340 บริเวณ ถนนพัทยากลางก่อนถึงแยกพัทยาใต้สุขุมวิท,12.917288,100.895492,https://stream1.ioc.pattaya.go.th/live/CC-340.m3u8
+CC-341,CC-341 แยกพัทยาใต้,12.917048,100.896191,https://stream1.ioc.pattaya.go.th/live/CC-341.m3u8
+CC-355,CC-355 จุดกลับรถรุ่งฟ้าคอนโด,12.923063,100.898271,https://stream1.ioc.pattaya.go.th/live/CC-355.m3u8
+CC-367,CC-367 แยกมุมอร่อย-เพนียดช้าง,12.942493,100.894864,https://stream1.ioc.pattaya.go.th/live/CC-367.m3u8
+CC-369,CC-369 แยกมุมอร่อย-เพนียดช้าง,12.9425291,100.8949365,https://stream1.ioc.pattaya.go.th/live/CC-369.m3u8
+CC-374,CC-374 แยกพัทยากลาง-บิ๊กซีเอ็กตร้า,12.933952,100.8945,https://stream1.ioc.pattaya.go.th/live/CC-374.m3u8
+CC-376,CC-376 แยกพัทยากลาง-บิ๊กซีเอ็กตร้า,12.933844,100.894449,https://stream1.ioc.pattaya.go.th/live/CC-376.m3u8
+CC-377,CC-377 แยกพัทยากลาง-บิ๊กซีเอ็กตร้า,12.933852,100.894548,https://stream1.ioc.pattaya.go.th/live/CC-377.m3u8
+CC-378,CC-378 แยกถนนพัทยากลาง-ถนนเฉลิมพระเกียรติ,12.934686,100.892306,https://stream1.ioc.pattaya.go.th/live/CC-378.m3u8
+CC-381,CC-381 ซอยกอไผ่,12.920135,100.879952,https://stream1.ioc.pattaya.go.th/live/CC-381.m3u8
+CC-382,CC-382 วอล์คกิ้งสตรีท,12.92436,100.873211,https://stream1.ioc.pattaya.go.th/live/CC-382.m3u8
+CC-416,CC-416 FLD-13 ซอยบัวขาว,12.928752,100.884814,https://stream1.ioc.pattaya.go.th/live/CC-416.m3u8
+KC-133,KC-133 ถนนหน้าบ้าน-หาดตาแหวน,12.922743,100.786698,https://stream1.ioc.pattaya.go.th/live/KC-133.m3u8
+KC-181,KC-181 จุดชมวิวเขายักษ์,12.906808,100.774889,https://stream1.ioc.pattaya.go.th/live/KC-181.m3u8
+NC-001,NC-001 หาดกระทิงลาย,12.991888,100.925587,https://stream1.ioc.pattaya.go.th/live/NC-001.m3u8
+NC-004,NC-004 หาดกระทิงลาย,12.990403,100.92483,https://stream1.ioc.pattaya.go.th/live/NC-004.m3u8
+NC-014,NC-014 หาดกระทิงลาย,12.983031,100.91983,https://stream1.ioc.pattaya.go.th/live/NC-014.m3u8
+NC-017,NC-017 กลางซอยสุขุมวิท-พัทยา 3 กล้องตัวที่ 2,12.990693,100.926764,https://stream1.ioc.pattaya.go.th/live/NC-017.m3u8
+NC-018,NC-018 แยกถนนเลียบทางรถไฟตัดกับหนองปลาไหล กล้องตัวที่ 1,12.991898,100.932145,https://stream1.ioc.pattaya.go.th/live/NC-018.m3u8
+NC-026,NC-026 กลางซอยสุขุมวิท-พัทยา 15 กล้องตัวที่ 2,12.98204,100.925335,https://stream1.ioc.pattaya.go.th/live/NC-026.m3u8
+NC-027,NC-027 TVA-115 แยกหนองเกตุใหญ่เลียบทางรถไฟ,12.98184,100.9296,https://stream1.ioc.pattaya.go.th/live/NC-027.m3u8
+NC-028,NC-028 แยกหนองเกตุใหญ่เลียบทางรถไฟ,12.982068,100.929744,https://stream1.ioc.pattaya.go.th/live/NC-028.m3u8
+NC-029,NC-029  หนองเกตุใหญ่,12.981893,100.929771,https://stream1.ioc.pattaya.go.th/live/NC-029.m3u8
+NC-032,NC-032 ใกล้ถนนสุขุมวิท-พัทยา 21 ซอย 4 กล้องตัวที่ 1,12.975696,100.920925,https://stream1.ioc.pattaya.go.th/live/NC-032.m3u8
+NC-033,NC-033 ใกล้ถนนสุขุมวิท-พัทยา 21 ซอย 4 กล้องตัวที่ 2,12.975657,100.921054,https://stream1.ioc.pattaya.go.th/live/NC-033.m3u8
+NC-035,NC-035 แยกสุขุมวิท-โพธิ์งาม,12.969946,100.910945,https://stream1.ioc.pattaya.go.th/live/NC-035.m3u8
+NC-037,NC-037 แยกสุขุมวิท-ชัยพรวิถี,12.967306,100.910271,https://stream1.ioc.pattaya.go.th/live/NC-037.m3u8
+NC-046,NC-046 ศาลาข้างลานอเนกประสงค์ลานโพธิ์,12.974099,100.906801,https://stream1.ioc.pattaya.go.th/live/NC-046.m3u8
+NC-047,NC-047 ลานอเนกประสงค์ลานโพธิ์,12.974274,100.906288,https://stream1.ioc.pattaya.go.th/live/NC-047.m3u8
+NC-050,NC-050 หน้าธนาคารกสิกรไทย สาขาตลาดนาเกลือ กล้องตัวที่ 2,12.971078,100.90367,https://stream1.ioc.pattaya.go.th/live/NC-050.m3u8
+NC-052,NC-052 ตลาดนาเกลือ (ตลาดรุ่งโรจน์),12.969261,100.901405,https://stream1.ioc.pattaya.go.th/live/NC-052.m3u8
+NC-053,NC-053 โรงพยาบาลบางละมุง กล้องตัวที่ 1,12.967492,100.905551,https://stream1.ioc.pattaya.go.th/live/NC-053.m3u8
+NC-059,NC-059 ชัยพรวิถี1,12.963035,100.920434,https://stream1.ioc.pattaya.go.th/live/NC-059.m3u8
+NC-061,NC-061 แยกชัยพรวิถีเลียบทางรถไฟ,12.962975,100.920791,https://stream1.ioc.pattaya.go.th/live/NC-061.m3u8
+NC-062,NC-062 แยกชัยพรวิถีเลียบทางรถไฟ,12.963072,100.920568,https://stream1.ioc.pattaya.go.th/live/NC-062.m3u8
+NC-064,NC-064 จุดกลับรถหน้าเทคนิคออโต้แอร์,12.962802,100.908962,https://stream1.ioc.pattaya.go.th/live/NC-064.m3u8
+NC-068,NC-068 แยกหนองใหญ่เลียบทางรถไฟ,12.949105,100.913753,https://stream1.ioc.pattaya.go.th/live/NC-068.m3u8
+NC-069,NC-069 แยกหนองใหญ่เลียบทางรถไฟ,12.949126,100.913892,https://stream1.ioc.pattaya.go.th/live/NC-069.m3u8
+NC-070,NC-070 บ้านหนองใหญ่,12.949016,100.913597,https://stream1.ioc.pattaya.go.th/live/NC-070.m3u8
+NC-072,NC-072 ซอยหนองใหญ่ 6 กล้องตัวที่ 2,12.949759,100.909845,https://stream1.ioc.pattaya.go.th/live/NC-072.m3u8
+NC-108,NC-108 ปากซอยสุขุมวิทพัทยา 30,12.950486,100.906339,https://stream1.ioc.pattaya.go.th/live/NC-108.m3u8
+NC-112,NC-112 ซ.พัทยาเหนือซอย 2 ตัดโพธิสาร,12.952156,100.905856,https://stream1.ioc.pattaya.go.th/live/NC-112.m3u8
+NC-113,NC-113 ซ.พัทยาเหนือซอย 2 ตัดโพธิสาร,12.95237,100.905875,https://stream1.ioc.pattaya.go.th/live/NC-113.m3u8
+NC-114,NC-114 จุดกลับรถหน้าเทคนิคออโต้แอร์,12.962826,100.909207,https://stream1.ioc.pattaya.go.th/live/NC-114.m3u8
+NC-116,NC-116 ซอยโพธิสาร กล้องตัวที่ 1,12.953371,100.9034,https://stream1.ioc.pattaya.go.th/live/NC-116.m3u8
+NC-117,NC-117 ซอยโพธิสาร กล้องตัวที่ 2,12.953413,100.903298,https://stream1.ioc.pattaya.go.th/live/NC-117.m3u8
+NC-119,NC-119 กลางซอยโพธิสาร 6 กล้องตัวที่ 2,12.95712,100.90113,https://stream1.ioc.pattaya.go.th/live/NC-119.m3u8
+NC-120,NC-120 กลางซอยสุขุมวิท พัทยา 28-11 กล้องตัวที่ 1,12.96026,100.903601,https://stream1.ioc.pattaya.go.th/live/NC-120.m3u8
+NC-121,NC-121 กลางซอยสุขุมวิท พัทยา 28-11 กล้องตัวที่ 2,12.960246,100.903732,https://stream1.ioc.pattaya.go.th/live/NC-121.m3u8
+NC-125,NC-125 ถนนพัทยา-นาเกลือ กล้องตัวที่ 2,12.962915,100.896069,https://stream1.ioc.pattaya.go.th/live/NC-125.m3u8
+NC-168,NC-168 ธนาคารออมสิน สาขาโพธิสัมพันธ์ ซอยพัทยา-นาเกลือ 16 กล้องตัวที่ 2,12.962847,100.892405,https://stream1.ioc.pattaya.go.th/live/NC-168.m3u8
+NC-172,NC-172 กลางซอยพัทยา-นาเกลือ 16 กล้องตัวที่ 1,12.965066,100.885925,https://stream1.ioc.pattaya.go.th/live/NC-172.m3u8
+NC-173,NC-173 กลางซอยพัทยา-นาเกลือ 16 กล้องตัวที่ 2,12.965063,100.885917,https://stream1.ioc.pattaya.go.th/live/NC-173.m3u8
+NC-176,NC-176 ซอยนาเกลือ 16/2 ตัดถนนพัทยา - นาเกลือ,12.956999,100.891866,https://stream1.ioc.pattaya.go.th/live/NC-176.m3u8
+NC-179,NC-179 กลางซอยนาเกลือ 16/2 กล้องตัวที่ 2,12.958095,100.889911,https://stream1.ioc.pattaya.go.th/live/NC-179.m3u8
+NC-180,NC-180 Top นาเกลือ 16/2,12.95924,100.886982,https://stream1.ioc.pattaya.go.th/live/NC-180.m3u8
+NC-181,NC-181 ซอยข้างแฟมิลี่มาร์ท ตัดซอยนาเกลือ 16/2,12.959227,100.886987,https://stream1.ioc.pattaya.go.th/live/NC-181.m3u8
+NC-182,NC-182 ซอยข้างแฟมิลี่มาร์ท ตัดซอยนาเกลือ 16/2,12.959229,100.887001,https://stream1.ioc.pattaya.go.th/live/NC-182.m3u8
+NC-184,NC-184 กลางซอยนาเกลือ 18 กล้องตัวที่ 2,12.95673,100.887811,https://stream1.ioc.pattaya.go.th/live/NC-184.m3u8
+NC-188,NC-188 บริเวณถนนพัทยาเหนือ - วงเวียนปลาโลมา,12.951066,100.887942,https://stream1.ioc.pattaya.go.th/live/NC-188.m3u8
+NC-189,NC-189 ปากซอยเพ็ชรตระกูลถนนพัทยาเหนือ,12.950702,100.891142,https://stream1.ioc.pattaya.go.th/live/NC-189.m3u8
+NC-322,NC-322 หน้าธนาคารธนชาติ สาขาพัทยาเหนือ กล้องตัวที่ 1,12.94926,100.900699,https://stream1.ioc.pattaya.go.th/live/NC-322.m3u8
+NC-323,NC-323 หน้าธนาคารธนชาติ สาขาพัทยาเหนือ กล้องตัวที่ 2,12.949262,100.900674,https://stream1.ioc.pattaya.go.th/live/NC-323.m3u8
+NC-338,NC-338 แยกถนนพัทยานาเกลือ-สว่างฟ้า,12.971723,100.904719,https://stream1.ioc.pattaya.go.th/live/NC-338.m3u8
+NC-344,NC-344 แยกถนนพัทยานาเกลือ-ซอยโพธิสาร,12.959811,100.893873,https://stream1.ioc.pattaya.go.th/live/NC-344.m3u8
+NC-350,NC-350 แยกปริญญา,12.949995,100.897247,https://stream1.ioc.pattaya.go.th/live/NC-350.m3u8
+NC-351,NC-351 แยกปริญญา,12.949735,100.897206,https://stream1.ioc.pattaya.go.th/live/NC-351.m3u8
+NC-353,NC-353 แยกสุขุมวิท-พัทยาเหนือ,12.94864,100.905725,https://stream1.ioc.pattaya.go.th/live/NC-353.m3u8
+NC-357,NC-357 ซอยด้านข้าง สภต.บางละมุง,12.975657,100.914311,https://stream1.ioc.pattaya.go.th/live/NC-357.m3u8
+NC-358,NC-358 ปากซอยโพธิสารซอย 8,12.95712,100.897086,https://stream1.ioc.pattaya.go.th/live/NC-358.m3u8
+NC-360,NC-360 ตลาดใหม่นาเกลือ,12.969737,100.907463,https://stream1.ioc.pattaya.go.th/live/NC-360.m3u8
+NC-362,NC-362 แยกสว่างฟ้า 3,12.971478,100.90874,https://stream1.ioc.pattaya.go.th/live/NC-362.m3u8
+NC-363,NC-363 โพธิสัมพันธ์,12.96012,100.894084,https://stream1.ioc.pattaya.go.th/live/NC-363.m3u8
+NC-364,NC-364 ซอยโพธิสาร 6,12.954678,100.900455,https://stream1.ioc.pattaya.go.th/live/NC-364.m3u8
+NC-431,NC-431 FLD-11 โรงเรียนเมืองพัทยา4,12.951758,100.90669,https://stream2.ioc.pattaya.go.th/live/NC-431.m3u8
+NC-435,NC-435 FLD-17 หน้าวิทยาเทคนิคพัทยา,12.982435,100.924188,https://stream2.ioc.pattaya.go.th/live/NC-435.m3u8
+RC-011,RC-011 แยกไฟแดงหนองเกตุใหญ่,12.984073,100.920649,https://stream1.ioc.pattaya.go.th/live/RC-011.m3u8
+RC-013,RC-013 แยกไฟแดงหนองเกตุใหญ่,12.983728,100.920778,https://stream1.ioc.pattaya.go.th/live/RC-013.m3u8
+RC-024,RC-024 กระทิงลาย,12.99713,100.928197,https://stream1.ioc.pattaya.go.th/live/RC-024.m3u8
+RC-025,RC-025 กระทิงลาย,12.995337,100.927298,https://stream1.ioc.pattaya.go.th/live/RC-025.m3u8
+RC-026,RC-026 กระทิงลาย,12.99528,100.927641,https://stream1.ioc.pattaya.go.th/live/RC-026.m3u8
+RC-031,RC-031 กระทิงลาย,12.989564,100.924809,https://stream1.ioc.pattaya.go.th/live/RC-031.m3u8
+RC-032,RC-032 กระทิงลาย,12.991511,100.925791,https://stream1.ioc.pattaya.go.th/live/RC-032.m3u8
+RC-041,RC-041 บ้านโรงไม้ขีด,12.981964,100.929575,https://stream1.ioc.pattaya.go.th/live/RC-041.m3u8
+RC-044,RC-044 บ้านโรงไม้ขีด,12.974525,100.926059,https://stream1.ioc.pattaya.go.th/live/RC-044.m3u8
+RC-125,RC-125 ตลาดนาเกลือเก่า,12.971595,100.91146,https://stream1.ioc.pattaya.go.th/live/RC-125.m3u8
+RC-126,RC-126 ตลาดนาเกลือเก่า,12.973224,100.912508,https://stream1.ioc.pattaya.go.th/live/RC-126.m3u8
+RC-134,RC-134 วัดช่องลม,12.981237,100.918476,https://stream1.ioc.pattaya.go.th/live/RC-134.m3u8
+RC-143,RC-143 หน้าตลาดอมร,12.970432,100.908936,https://stream1.ioc.pattaya.go.th/live/RC-143.m3u8
+RC-144,RC-144 ลานโพธิ์,12.970121,100.909789,https://stream1.ioc.pattaya.go.th/live/RC-144.m3u8
+RC-145,RC-145 ลานโพธิ์,12.971078,100.907031,https://stream1.ioc.pattaya.go.th/live/RC-145.m3u8
+RC-147,RC-147 แยกสว่างฟ้า 3,12.971485,100.908735,https://stream1.ioc.pattaya.go.th/live/RC-147.m3u8
+RC-148,RC-148 ตลาดนาเกลือเก่า,12.973163,100.908431,https://stream1.ioc.pattaya.go.th/live/RC-148.m3u8
+RC-151,RC-151 ลานโพธิ์,12.974311,100.907911,https://stream1.ioc.pattaya.go.th/live/RC-151.m3u8
+RC-155,RC-155 บ้านหัวทุ่ง,12.966208,100.910025,https://stream1.ioc.pattaya.go.th/live/RC-155.m3u8
+RC-156,RC-156 มัสยิดฮีดายาตุสซาลีกีน-01,12.96012,100.908592,https://stream1.ioc.pattaya.go.th/live/RC-156.m3u8
+RC-157,RC-157 มัสยิดฮีดายาตุสซาลีกีน-02,12.960384,100.908646,https://stream1.ioc.pattaya.go.th/live/RC-157.m3u8
+RC-159,RC-159 บ้านหัวทุ่ง,12.961514,100.906849,https://stream1.ioc.pattaya.go.th/live/RC-159.m3u8
+RC-160,RC-160 ต้นกระบก,12.961474,100.906752,https://stream1.ioc.pattaya.go.th/live/RC-160.m3u8
+RC-161,RC-161 สามแยกด้านในซอยพัทยา-ซอยสุขุมวิท28,12.960931,100.906827,https://stream1.ioc.pattaya.go.th/live/RC-161.m3u8
+RC-162,RC-162 บ้านหัวทุ่ง,12.96344,100.907106,https://stream1.ioc.pattaya.go.th/live/RC-162.m3u8
+RC-164,RC-164 บ้านหัวทุ่ง,12.968524,100.908469,https://stream1.ioc.pattaya.go.th/live/RC-164.m3u8
+RC-165,RC-165 ซอยสุขุมวิท 28,12.968511,100.908464,https://stream1.ioc.pattaya.go.th/live/RC-165.m3u8
+RC-166,RC-166 ต้นกระบก,12.959707,100.906838,https://stream1.ioc.pattaya.go.th/live/RC-166.m3u8
+RC-167,RC-167 ต้นกระบก,12.959038,100.906881,https://stream1.ioc.pattaya.go.th/live/RC-167.m3u8
+RC-168,RC-168 ต้นกระบก,12.957888,100.90686,https://stream1.ioc.pattaya.go.th/live/RC-168.m3u8
+RC-169,RC-169 ต้นกระบก,12.955619,100.90635,https://stream1.ioc.pattaya.go.th/live/RC-169.m3u8
+RC-171,RC-171 ต้นกระบก,12.956383,100.904049,https://stream1.ioc.pattaya.go.th/live/RC-171.m3u8
+RC-172,RC-172 พัทยา-ซอยสุขุมวิท 28,12.954558,100.907211,https://stream1.ioc.pattaya.go.th/live/RC-172.m3u8
+RC-173,RC-173 ปากซอยโพธิสาร-สุขุมวิท,12.952253,100.906495,https://stream1.ioc.pattaya.go.th/live/RC-173.m3u8
+RC-187,RC-187 ลานโพธิ์,12.969193,100.908284,https://stream1.ioc.pattaya.go.th/live/RC-187.m3u8
+RC-188,RC-188 ตลาดใหม่นาเกลือ,12.969703,100.907538,https://stream1.ioc.pattaya.go.th/live/RC-188.m3u8
+RC-190,RC-190 ลานโพธิ์,12.970495,100.906066,https://stream1.ioc.pattaya.go.th/live/RC-190.m3u8
+RC-191,RC-191 สว่างฟ้า สุขุมวิท (กล้องชุมชน 254),12.968584,100.910585,https://stream1.ioc.pattaya.go.th/live/RC-191.m3u8
+RC-192,RC-192 ลานโพธิ์,12.968493,100.91054,https://stream1.ioc.pattaya.go.th/live/RC-192.m3u8
+RC-193,RC-193 ซอยไปรษณีย์,12.970816,100.9037,https://stream1.ioc.pattaya.go.th/live/RC-193.m3u8
+RC-197,RC-197 ซอยไปรษณีย์,12.968736,100.90635,https://stream1.ioc.pattaya.go.th/live/RC-197.m3u8
+RC-199,RC-199 ซอยไปรษณีย์,12.968806,100.907514,https://stream1.ioc.pattaya.go.th/live/RC-199.m3u8
+RC-209,RC-209 นาเกลือซอย 7 (กล้องที่ 2),12.973383,100.906932,https://stream1.ioc.pattaya.go.th/live/RC-209.m3u8
+RC-210,RC-210 ลานโพธิ์,12.97331,100.906723,https://stream1.ioc.pattaya.go.th/live/RC-210.m3u8
+RC-245,RC-245 หนองใหญ่ก้าวหน้า,12.950506,100.904859,https://stream1.ioc.pattaya.go.th/live/RC-245.m3u8
+RC-246,RC-246 สี่แยกพัทยาเหนือ - สุขุมวิท SN02,12.948703,100.905486,https://stream1.ioc.pattaya.go.th/live/RC-246.m3u8
+RC-247,RC-247 ต้นกระบก,12.952352,100.905717,https://stream1.ioc.pattaya.go.th/live/RC-247.m3u8
+RC-256,RC-256 บ้านกระบก 33,12.958849,100.909749,https://stream1.ioc.pattaya.go.th/live/RC-256.m3u8
+RC-257,RC-257 เสา Base หน้าเมืองจําลอง (SOS),12.958468,100.908531,https://stream1.ioc.pattaya.go.th/live/RC-257.m3u8
+RC-258,RC-258 พัทยา-ซอยสุขุมวิท ซ. 33,12.959765,100.908834,https://stream1.ioc.pattaya.go.th/live/RC-258.m3u8
+RC-259,RC-259 จุดกลับรถเมืองจำลอง,12.956937,100.908163,https://stream1.ioc.pattaya.go.th/live/RC-259.m3u8
+RC-263,RC-263 หนองใหญ่บ้านล่าง,12.951717,100.906707,https://stream1.ioc.pattaya.go.th/live/RC-263.m3u8
+RC-264,RC-264 สี่แยกพัทยาเหนือ - สุขุมวิท,12.948521,100.905758,https://stream1.ioc.pattaya.go.th/live/RC-264.m3u8
+RC-268,RC-268 สาย7ฝั่งขาออกพัทยาด้านหลัง,12.944633,100.908557,https://stream1.ioc.pattaya.go.th/live/RC-268.m3u8
+RC-271,RC-271 หนองใหญ่บ้านล่าง,12.951068,100.907774,https://stream1.ioc.pattaya.go.th/live/RC-271.m3u8
+RC-272,RC-272 หนองใหญ่บ้านล่าง,12.951074,100.907808,https://stream1.ioc.pattaya.go.th/live/RC-272.m3u8
+RC-284,RC-284 บ้านกระบก 33,12.956079,100.915258,https://stream1.ioc.pattaya.go.th/live/RC-284.m3u8
+RC-289,RC-289 ซอยชัยพรวิถี,12.96603,100.915384,https://stream1.ioc.pattaya.go.th/live/RC-289.m3u8
+RC-290,RC-290 ชัยพรวิถี,12.966388,100.913984,https://stream1.ioc.pattaya.go.th/live/RC-290.m3u8
+RC-291,RC-291 ชัยพรวิถี,12.965819,100.916207,https://stream1.ioc.pattaya.go.th/live/RC-291.m3u8
+RC-293,RC-293 บ้านกระบก 33,12.965994,100.910199,https://stream1.ioc.pattaya.go.th/live/RC-293.m3u8
+RC-294,RC-294 บ้านกระบก 33,12.962815,100.909477,https://stream1.ioc.pattaya.go.th/live/RC-294.m3u8
+RC-295,RC-295 บ้านกระบก 33,12.96131,100.909172,https://stream1.ioc.pattaya.go.th/live/RC-295.m3u8
+RC-322,RC-322 บริเวณ ทางเบี่ยงเข้าถนนพัทยากลาง,12.931952,100.899736,https://stream1.ioc.pattaya.go.th/live/RC-322.m3u8
+RC-335,RC-335 รุ่งเรือง,12.943161,100.904188,https://stream1.ioc.pattaya.go.th/live/RC-335.m3u8
+RC-336,RC-336 รุ่งเรือง,12.943051,100.907117,https://stream1.ioc.pattaya.go.th/live/RC-336.m3u8
+RC-337,RC-337 สาย7ฝั่งขาเข้าพัทยาด้านหน้า,12.944499,100.906903,https://stream1.ioc.pattaya.go.th/live/RC-337.m3u8
+RC-339,RC-339 รุ่งเรือง,12.941972,100.903845,https://stream1.ioc.pattaya.go.th/live/RC-339.m3u8
+RC-343,RC-343 สถานีสูบน้ำที่ 1 ซ.สุขุมวิท 45,12.938401,100.90285,https://stream1.ioc.pattaya.go.th/live/RC-343.m3u8
+RC-345,RC-345 5ธันวา,12.938032,100.907804,https://stream1.ioc.pattaya.go.th/live/RC-345.m3u8
+RC-347,RC-347 5 ธันวา,12.939198,100.903021,https://stream1.ioc.pattaya.go.th/live/RC-347.m3u8
+RC-349,RC-349 5 ธันวา,12.936971,100.902394,https://stream1.ioc.pattaya.go.th/live/RC-349.m3u8
+RC-350,RC-350 ปากซอยสยามคันทรี่คลับ,12.934273,100.905269,https://stream1.ioc.pattaya.go.th/live/RC-350.m3u8
+RC-351,RC-351 5 ธันวา,12.935018,100.906645,https://stream1.ioc.pattaya.go.th/live/RC-351.m3u8
+RC-354,RC-354 ซอยสุขุมวิท49,12.93300353,100.9049189,https://stream1.ioc.pattaya.go.th/live/RC-354.m3u8
+RC-367,RC-367 เจริญสุขพัฒนา,12.931238,100.909225,https://stream1.ioc.pattaya.go.th/live/RC-367.m3u8
+RC-372,RC-372 พัทยากลาง,12.930707,100.911326,https://stream1.ioc.pattaya.go.th/live/RC-372.m3u8
+RC-376,RC-376 พัทยากลาง,12.930856,100.910644,https://stream1.ioc.pattaya.go.th/live/RC-376.m3u8
+RC-378,RC-378 พัทยากลาง,12.931792,100.906747,https://stream2.ioc.pattaya.go.th/live/RC-378.m3u8
+RC-379,RC-379 พัทยากลาง,12.931628,100.907045,https://stream2.ioc.pattaya.go.th/live/RC-379.m3u8
+RC-381,RC-381 เขาน้อย,12.925495,100.903429,https://stream2.ioc.pattaya.go.th/live/RC-381.m3u8
+RC-382,RC-382 เขาน้อย,12.924485,100.906296,https://stream2.ioc.pattaya.go.th/live/RC-382.m3u8
+RC-389,RC-389 ซอยวัดธรรมสามัคคี,12.915948,100.902452,https://stream2.ioc.pattaya.go.th/live/RC-389.m3u8
+RC-395,RC-395 วัดธรรมสามัคคี,12.915717,100.900594,https://stream2.ioc.pattaya.go.th/live/RC-395.m3u8
+RC-398,RC-398 วัดธรรมสามัคคี,12.916721,100.898534,https://stream2.ioc.pattaya.go.th/live/RC-398.m3u8
+RC-400,RC-400 วัดธรรมสามัคคี,12.916609,100.897611,https://stream2.ioc.pattaya.go.th/live/RC-400.m3u8
+RC-403,RC-403 แยกไฟแดงพัทยากลาง,12.931431,100.900775,https://stream2.ioc.pattaya.go.th/live/RC-403.m3u8
+RC-408,RC-408 พัทยากลาง,12.927738,100.899682,https://stream2.ioc.pattaya.go.th/live/RC-408.m3u8
+RC-409,RC-409 เขาน้อย,12.927045,100.899451,https://stream2.ioc.pattaya.go.th/live/RC-409.m3u8
+RC-410,RC-410 เขาน้อย,12.92304,100.898258,https://stream2.ioc.pattaya.go.th/live/RC-410.m3u8
+RC-411,RC-411 เขาน้อย,12.92419,100.898588,https://stream2.ioc.pattaya.go.th/live/RC-411.m3u8
+RC-412,RC-412 เขาน้อย,12.919761,100.897295,https://stream2.ioc.pattaya.go.th/live/RC-412.m3u8
+RC-414,RC-414 เขาน้อย,12.923231,100.902657,https://stream2.ioc.pattaya.go.th/live/RC-414.m3u8
+RC-415,RC-415 สุขุมวิท75-01,12.918329,100.896866,https://stream2.ioc.pattaya.go.th/live/RC-415.m3u8
+RC-417,RC-417 วัดธรรมสามัคคี,12.917738,100.896686,https://stream2.ioc.pattaya.go.th/live/RC-417.m3u8
+RC-419,RC-419 สี่แยกพัทยาใต้ - สุขุมวิท,12.916756,100.896424,https://stream2.ioc.pattaya.go.th/live/RC-419.m3u8
+RC-420,RC-420 อรุโณทัย,12.928985,100.899661,https://stream2.ioc.pattaya.go.th/live/RC-420.m3u8
+RC-433,RC-433 พัทยาใต้พัฒนา,12.920433,100.896922,https://stream2.ioc.pattaya.go.th/live/RC-433.m3u8
+RC-434,RC-434 สี่แยกพัทยากลาง- สาย3,12.932639,100.888814,https://stream2.ioc.pattaya.go.th/live/RC-434.m3u8
+RC-435,RC-435 ชุมสาย,12.934561,100.892153,https://stream2.ioc.pattaya.go.th/live/RC-435.m3u8
+RC-436,RC-436 ถนน เฉลิมพระเกียรติ (กล้องชุมชน 231),12.934571,100.89215,https://stream2.ioc.pattaya.go.th/live/RC-436.m3u8
+RC-439,RC-439 ชุมสาย,12.932477,100.89078,https://stream2.ioc.pattaya.go.th/live/RC-439.m3u8
+RC-440,RC-440 ถนนเฉลิมพระเกียรติ ช.โสภณ,12.933204,100.891466,https://stream2.ioc.pattaya.go.th/live/RC-440.m3u8
+RC-441,RC-441 ชุมสาย,12.931246,100.890152,https://stream2.ioc.pattaya.go.th/live/RC-441.m3u8
+RC-442,RC-442 ชุมสาย,12.929298,100.888669,https://stream2.ioc.pattaya.go.th/live/RC-442.m3u8
+RC-443,RC-443 ชุมสาย,12.929285,100.888664,https://stream2.ioc.pattaya.go.th/live/RC-443.m3u8
+RC-445,RC-445 ถนนเฉลิมพระเกียรติ ซ.17,12.931586,100.89034,https://stream2.ioc.pattaya.go.th/live/RC-445.m3u8
+RC-519,RC-519 ป้อมตํารวจถนนเพ็ชรตระกูล,12.942871,100.891531,https://stream2.ioc.pattaya.go.th/live/RC-519.m3u8
+RC-520,RC-520 พัทยาสายสอง ด้านข้างบิ๊กซี,12.946361,100.891716,https://stream2.ioc.pattaya.go.th/live/RC-520.m3u8
+RC-522,RC-522 หนองอ้อ,12.941062,100.890507,https://stream2.ioc.pattaya.go.th/live/RC-522.m3u8
+RC-524,RC-524 แยกด้านในพัทยาสาย 2 ซอย4,12.940084,100.8906,https://stream2.ioc.pattaya.go.th/live/RC-524.m3u8
+RC-531,RC-531 หนองใหญ่ก้าวหน้า,12.946165,100.896174,https://stream2.ioc.pattaya.go.th/live/RC-531.m3u8
+RC-535,RC-535 หนองใหญ่ก้าวหน้า,12.949116,100.897099,https://stream2.ioc.pattaya.go.th/live/RC-535.m3u8
+RC-536,RC-536 หนองใหญ่ก้าวหน้า,12.944008,100.898024,https://stream2.ioc.pattaya.go.th/live/RC-536.m3u8
+RC-538,RC-538 ซอยเพนียดช้าง-ร.ร.ตันตรารักษ์,12.942813,100.901096,https://stream2.ioc.pattaya.go.th/live/RC-538.m3u8
+RC-540,RC-540 หนองใหญ่ก้าวหน้า,12.945291,100.904472,https://stream2.ioc.pattaya.go.th/live/RC-540.m3u8
+RC-542,RC-542 เพนียดช้าง-รุ่งเรืองทัวร์,12.948917,100.903405,https://stream2.ioc.pattaya.go.th/live/RC-542.m3u8
+RC-544,RC-544 หน้าศาลาว่าการเมืองพัทยา,12.950255,100.89317,https://stream2.ioc.pattaya.go.th/live/RC-544.m3u8
+RC-546,RC-546 หนองอ้อ,12.93867,100.887119,https://stream2.ioc.pattaya.go.th/live/RC-546.m3u8
+RC-547,RC-547 ซอย6 ยศศักดิ์,12.937776,100.883366,https://stream2.ioc.pattaya.go.th/live/RC-547.m3u8
+RC-548,RC-548 บริเวณ ถนนพัทยาสายสอง - ปากซอย 4,12.937847,100.886901,https://stream2.ioc.pattaya.go.th/live/RC-548.m3u8
+RC-550,RC-550 บริเวณ ถนนพัทยาสายสอง - ปากซอย6,12.941789,100.887921,https://stream2.ioc.pattaya.go.th/live/RC-550.m3u8
+RC-552,RC-552 ซอย 6 ยศศักดิ์,12.944931,100.884906,https://stream2.ioc.pattaya.go.th/live/RC-552.m3u8
+RC-553,RC-553 ซอย 6 ยศศักดิ์,12.943535,100.88839,https://stream2.ioc.pattaya.go.th/live/RC-553.m3u8
+RC-554,RC-554 ซอย 6 ยศศักดิ์,12.943511,100.88839,https://stream2.ioc.pattaya.go.th/live/RC-554.m3u8
+RC-560,RC-560 พัทยาสาย 2,12.945291,100.889036,https://stream2.ioc.pattaya.go.th/live/RC-560.m3u8
+RC-561,RC-561 ซอย 6 ยศศักดิ์,12.946653,100.888859,https://stream2.ioc.pattaya.go.th/live/RC-561.m3u8
+RC-562,RC-562 ซอย 6 ยศศักดิ์,12.945869,100.8849,https://stream2.ioc.pattaya.go.th/live/RC-562.m3u8
+RC-563,RC-563 พัทยากลางสาย 2 บริเวณศูนย์การค้าบิ๊กซี (กล้องที่ 1),12.945772,100.889044,https://stream2.ioc.pattaya.go.th/live/RC-563.m3u8
+RC-565,RC-565 หนองอ้อ,12.947822,100.888822,https://stream2.ioc.pattaya.go.th/live/RC-565.m3u8
+RC-566,RC-566 บริเวณ ถนนพัทยาสายสอง - ตรงข้ามปากซอย 1,12.947861,100.888723,https://stream2.ioc.pattaya.go.th/live/RC-566.m3u8
+RC-567,RC-567 บริเวณ ถนนพัทยาสายสอง-พัทยาบาร์ซาร์,12.948569,100.888752,https://stream2.ioc.pattaya.go.th/live/RC-567.m3u8
+RC-574,RC-574 สถานีสูบน้ำเขาตาโล เลียบทางรถไฟ,12.912006,100.901903,https://stream1.ioc.pattaya.go.th/live/RC-574.m3u8
+RC-576,RC-576 เขาตาโล,12.909504,100.899761,https://stream2.ioc.pattaya.go.th/live/RC-576.m3u8
+RC-578,RC-578 เขาตาโล,12.90882,100.902595,https://stream2.ioc.pattaya.go.th/live/RC-578.m3u8
+RC-579,RC-579 เขาตาโล,12.908603,100.903164,https://stream2.ioc.pattaya.go.th/live/RC-579.m3u8
+RC-582,RC-582 เขาตาโล,12.901751,100.896812,https://stream2.ioc.pattaya.go.th/live/RC-582.m3u8
+RC-586,RC-586 เขาตาโล,12.902585,100.900441,https://stream2.ioc.pattaya.go.th/live/RC-586.m3u8
+RC-589,RC-589 เทพประสิทธิ์,12.90983,100.895948,https://stream2.ioc.pattaya.go.th/live/RC-589.m3u8
+RC-590,RC-590 ปากซอยเขาตาโล,12.909811,100.895948,https://stream2.ioc.pattaya.go.th/live/RC-590.m3u8
+RC-591,RC-591 แยกเทพประสิทธิ์-สุขุมวิท,12.909244,100.895994,https://stream2.ioc.pattaya.go.th/live/RC-591.m3u8
+RC-593,RC-593 เทพประสิทธ์,12.91002,100.892107,https://stream2.ioc.pattaya.go.th/live/RC-593.m3u8
+RC-618,RC-618 หนองพังแค,12.889972,100.897625,https://stream2.ioc.pattaya.go.th/live/RC-618.m3u8
+RC-619,RC-619 ปากซอยวัดบุณย์กัญจนาราม,12.889447,100.897343,https://stream2.ioc.pattaya.go.th/live/RC-619.m3u8
+RC-620,RC-620 หน้า Underwater world,12.895821,100.896866,https://stream2.ioc.pattaya.go.th/live/RC-620.m3u8
+RC-624,RC-624 วัดบุญกัญจนาราม,12.889938,100.893435,https://stream2.ioc.pattaya.go.th/live/RC-624.m3u8
+RC-625,RC-625 วัดบุญกัญจนาราม,12.890051,100.887711,https://stream2.ioc.pattaya.go.th/live/RC-625.m3u8
+RC-632,RC-632 แยกไฟแดงชัยพฤกษ์ 3,12.881276,100.898684,https://stream2.ioc.pattaya.go.th/live/RC-632.m3u8
+RC-633,RC-633 ชัยพฤกษ์ฝั่งขาเข้าพัทยา,12.879417,100.89906,https://stream2.ioc.pattaya.go.th/live/RC-633.m3u8
+RC-634,RC-634 ชัยพฤกษ์ฝั่งขาเข้าพัทยา,12.879344,100.899081,https://stream2.ioc.pattaya.go.th/live/RC-634.m3u8
+RC-636,RC-636 ชัยพฤกษ์1 ซ.1,12.880635,100.896463,https://stream2.ioc.pattaya.go.th/live/RC-636.m3u8
+RC-638,RC-638 ชัยพฤกษ์1 ซ.3,12.879299,100.891826,https://stream2.ioc.pattaya.go.th/live/RC-638.m3u8
+RC-639,RC-639 ชัยพฤกษ์,12.878515,100.889337,https://stream2.ioc.pattaya.go.th/live/RC-639.m3u8
+RC-640,RC-640 ชัยพฤกษ์,12.877317,100.885257,https://stream2.ioc.pattaya.go.th/live/RC-640.m3u8
+RC-701,RC-701 ซอยบัวขาว,12.93488,100.888224,https://stream2.ioc.pattaya.go.th/live/RC-701.m3u8
+RC-703,RC-703 ซอยบัวขาว,12.93306,100.88743,https://stream2.ioc.pattaya.go.th/live/RC-703.m3u8
+RC-704,RC-704 ชุมสาย,12.932563,100.88699,https://stream2.ioc.pattaya.go.th/live/RC-704.m3u8
+RC-705,RC-705 ซอยบัวขาว,12.931311,100.886424,https://stream2.ioc.pattaya.go.th/live/RC-705.m3u8
+RC-706,RC-706 ซอยบัวขาว,12.928791,100.884831,https://stream2.ioc.pattaya.go.th/live/RC-706.m3u8
+RC-707,RC-707 ซอยบัวขาว,12.927377,100.883613,https://stream2.ioc.pattaya.go.th/live/RC-707.m3u8
+RC-708,RC-708 ซอยบัวขาว,12.927364,100.883605,https://stream2.ioc.pattaya.go.th/live/RC-708.m3u8
+RC-709,RC-709 วัดชัยมงคล,12.927549,100.880091,https://stream2.ioc.pattaya.go.th/live/RC-709.m3u8
+RC-711,RC-711 ซอยบัวขาว,12.926242,100.881971,https://stream2.ioc.pattaya.go.th/live/RC-711.m3u8
+RC-712,RC-712 ซอยบัวขาว,12.925693,100.880601,https://stream2.ioc.pattaya.go.th/live/RC-712.m3u8
+RC-713,RC-713 ซอยบัวขาว,12.924849,100.879928,https://stream2.ioc.pattaya.go.th/live/RC-713.m3u8
+RC-714,RC-714 วัดชัยมงคล,12.924059,100.878527,https://stream2.ioc.pattaya.go.th/live/RC-714.m3u8
+RC-715,RC-715 วัดชัยมงคล,12.923989,100.879311,https://stream2.ioc.pattaya.go.th/live/RC-715.m3u8
+RC-716,RC-716 หน้าโรงเรียนเมืองพัทยา 8 (กล้องที่ 1),12.92573,100.875942,https://stream2.ioc.pattaya.go.th/live/RC-716.m3u8
+RC-718,RC-718 พัทยาใต้หน้าตลาดวัดชัยมงคล (กล้องที่ 1),12.924454,100.877162,https://stream2.ioc.pattaya.go.th/live/RC-718.m3u8
+RC-719,RC-719 พัทยาใต้หน้าตลาดวัดชัยมงคล (กล้องที่ 2),12.924446,100.877178,https://stream2.ioc.pattaya.go.th/live/RC-719.m3u8
+RC-720,RC-720 วัดชัยมงคล,12.927455,100.876969,https://stream2.ioc.pattaya.go.th/live/RC-720.m3u8
+RC-722,RC-722 วัดชัยมงคล,12.925549,100.876143,https://stream2.ioc.pattaya.go.th/live/RC-722.m3u8
+RC-725,RC-725 พัทยาใต้-สาย 2,12.926234,100.875435,https://stream2.ioc.pattaya.go.th/live/RC-725.m3u8
+RC-726,RC-726 บริเวณ แยกพัทยาใต้สาย 2,12.926245,100.875448,https://stream2.ioc.pattaya.go.th/live/RC-726.m3u8
+RC-727,RC-727 บริเวณ แยกพัทยาใต้สาย 2,12.92625,100.875432,https://stream2.ioc.pattaya.go.th/live/RC-727.m3u8
+RC-732,RC-732 ตลาดด้านในชุมชนวัดชัยมงคล 2,12.923278,100.877023,https://stream2.ioc.pattaya.go.th/live/RC-732.m3u8
+RC-735,RC-735 วัดชัยมงคล,12.92105,100.875835,https://stream2.ioc.pattaya.go.th/live/RC-735.m3u8
+RC-736,RC-736 ทางขึ้นลงสะพานยกระดับท่าเทียบเรือบาลีฮาย 2,12.920232,100.87418,https://stream2.ioc.pattaya.go.th/live/RC-736.m3u8
+RC-737,RC-737 ซอยกอไผ่,12.91898,100.88559,https://stream2.ioc.pattaya.go.th/live/RC-737.m3u8
+RC-739,RC-739 ซอยกอไผ่,12.920151,100.879957,https://stream2.ioc.pattaya.go.th/live/RC-739.m3u8
+RC-742,RC-742 ซอยกอไผ่,12.914543,100.885633,https://stream2.ioc.pattaya.go.th/live/RC-742.m3u8
+RC-743,RC-743 ซอยกอไผ่,12.914528,100.885627,https://stream2.ioc.pattaya.go.th/live/RC-743.m3u8
+RC-745,RC-745 ซอยกอไผ่,12.912305,100.885737,https://stream2.ioc.pattaya.go.th/live/RC-745.m3u8
+RC-746,RC-746 ซอยกอไผ่,12.908355,100.885351,https://stream2.ioc.pattaya.go.th/live/RC-746.m3u8
+RC-747,RC-747 ซอยกอไผ่,12.909458,100.88541,https://stream2.ioc.pattaya.go.th/live/RC-747.m3u8
+RC-751,RC-751 ซอยบ่อนไก่,12.91905,100.878688,https://stream2.ioc.pattaya.go.th/live/RC-751.m3u8
+RC-752,RC-752 ทัพพระยา,12.916799,100.877557,https://stream2.ioc.pattaya.go.th/live/RC-752.m3u8
+RC-753,RC-753 ซอยบ่อนไก่,12.916792,100.877559,https://stream2.ioc.pattaya.go.th/live/RC-753.m3u8
+RC-754,RC-754 พัทยาใต้-ซอย17 ด้านหน้ากรมที่ดิน,12.91423,100.880587,https://stream2.ioc.pattaya.go.th/live/RC-754.m3u8
+RC-762,RC-762 บริเวณหน้า walking street,12.927447,100.87477,https://stream2.ioc.pattaya.go.th/live/RC-762.m3u8
+RC-765,RC-765 บริเวณ ชายหาดพัทยา ซ.14,12.926896,100.873933,https://stream2.ioc.pattaya.go.th/live/RC-765.m3u8
+RC-774,RC-774 วอลค์กิ้งสตรีท,12.924734,100.869336,https://stream2.ioc.pattaya.go.th/live/RC-774.m3u8
+RC-776,RC-776 วอลค์กิ้งสตรีท,12.92459,100.868289,https://stream2.ioc.pattaya.go.th/live/RC-776.m3u8
+RC-782,RC-782 ทางขึ้นลงสะพานยกระดับท่าเทียบเรือบาลีฮาย 1,12.922844,100.868091,https://stream2.ioc.pattaya.go.th/live/RC-782.m3u8
+RC-783,RC-783 วอล์คกิ้งสตรีท,12.920912,100.870199,https://stream2.ioc.pattaya.go.th/live/RC-783.m3u8
+RC-784,RC-784 วอล์คกิ้งสตรีท,12.921191,100.872197,https://stream2.ioc.pattaya.go.th/live/RC-784.m3u8
+RC-785,RC-785 วอล์คกิ้งสตรีท,12.92214,100.871527,https://stream2.ioc.pattaya.go.th/live/RC-785.m3u8
+RC-786,RC-786 วอล์คกิ้งสตรีท,12.924331,100.873077,https://stream2.ioc.pattaya.go.th/live/RC-786.m3u8
+RC-788,RC-788 วอล์คกิ้งสตรีท,12.926146,100.874483,https://stream2.ioc.pattaya.go.th/live/RC-788.m3u8
+RC-789,RC-789 วอล์คกิ้งสตรีท,12.926143,100.87448,https://stream2.ioc.pattaya.go.th/live/RC-789.m3u8
+RC-798,RC-798 สี่แยกพัทยาใต้ - สุขุมวิท,12.917091,100.896134,https://stream2.ioc.pattaya.go.th/live/RC-798.m3u8
+RC-803,RC-803 พัทยาใต้พัฒนา,12.921607,100.892448,https://stream2.ioc.pattaya.go.th/live/RC-803.m3u8
+RC-817,RC-817 สวนสุขภาพ,12.918826,100.868501,https://stream2.ioc.pattaya.go.th/live/RC-817.m3u8
+RC-832,RC-832 พัทยากลางปากซอยบัวขาว,12.935876,100.888586,https://stream2.ioc.pattaya.go.th/live/RC-832.m3u8
+RC-833,RC-833 พัทยากลางสาย 2 ตรงข้าม ซ.7,12.935703,100.885946,https://stream2.ioc.pattaya.go.th/live/RC-833.m3u8
+RC-834,RC-834 บริเวณ ถนนพัทยาสายสองตรงข้ามซอย 11,12.931795,100.882798,https://stream2.ioc.pattaya.go.th/live/RC-834.m3u8
+RC-835,RC-835 พัทยากลางสาย 2 ซ. 10,12.93202,100.883098,https://stream2.ioc.pattaya.go.th/live/RC-835.m3u8
+RC-836,RC-836 บริเวณ ถนนพัทยาสายสอง–ตรงข้ามปากซอย 14,12.93025,100.881054,https://stream2.ioc.pattaya.go.th/live/RC-836.m3u8
+RC-840,RC-840 หน้าซอยไปรษณีย์,12.930242,100.881049,https://stream2.ioc.pattaya.go.th/live/RC-840.m3u8
+RC-841,RC-841 ซอยพัทยาแลนด์ 2,12.92767,100.87717,https://stream2.ioc.pattaya.go.th/live/RC-841.m3u8
+RC-842,RC-842 ซอยพัทยาแลนด์ 1,12.928535,100.87636,https://stream2.ioc.pattaya.go.th/live/RC-842.m3u8
+RC-843,RC-843 ซอยพัทยาแลนด์ 1,12.927429,100.876693,https://stream2.ioc.pattaya.go.th/live/RC-843.m3u8
+RC-855,RC-855 หน้าโรงแรมลองบีช,12.964703,100.88716,https://stream2.ioc.pattaya.go.th/live/RC-855.m3u8
+RC-882,RC-882 ซอยนาเกลือ 25,12.95563,100.890914,https://stream2.ioc.pattaya.go.th/live/RC-882.m3u8
+RC-883,RC-883 โพธิสัมพันธ์,12.959059,100.895656,https://stream2.ioc.pattaya.go.th/live/RC-883.m3u8
+RC-884,RC-884 โพธิสัมพันธ์,12.958547,100.896072,https://stream2.ioc.pattaya.go.th/live/RC-884.m3u8
+RC-885,RC-885 โพธิสัมพันธ์,12.958683,100.89774,https://stream2.ioc.pattaya.go.th/live/RC-885.m3u8
+RC-889,RC-889 ไฟแดงตลาดโพธิสาร,12.955541,100.899178,https://stream2.ioc.pattaya.go.th/live/RC-889.m3u8
+RC-890,RC-890 ซอยโพธิสาร6,12.954605,100.900634,https://stream2.ioc.pattaya.go.th/live/RC-890.m3u8
+RC-891,RC-891 หนองใหญ่ก้าวหน้า,12.953084,100.898153,https://stream2.ioc.pattaya.go.th/live/RC-891.m3u8
+RC-899,RC-899 วงเวียนปลาโลมา,12.951416,100.887676,https://stream2.ioc.pattaya.go.th/live/RC-899.m3u8
+RC-902,RC-902 นาเกลือซอย 31,12.953309,100.889232,https://stream2.ioc.pattaya.go.th/live/RC-902.m3u8
+RC-903,RC-903 นาเกลือซอย 31,12.953296,100.889219,https://stream2.ioc.pattaya.go.th/live/RC-903.m3u8
+RC-904,RC-904 แยกด้านในนาเกลือ 18,12.953959,100.886893,https://stream2.ioc.pattaya.go.th/live/RC-904.m3u8
+RC-905,RC-905 แยกด้านในนาเกลือ 18,12.953949,100.886883,https://stream2.ioc.pattaya.go.th/live/RC-905.m3u8
+RC-906,RC-906 แยกด้านในนาเกลือ 18,12.953962,100.886904,https://stream2.ioc.pattaya.go.th/live/RC-906.m3u8
+RC-907,RC-907 ร้อยหลัง,12.95398,100.889753,https://stream2.ioc.pattaya.go.th/live/RC-907.m3u8
+RC-913,RC-913 นาเกลือซอย 15,12.966075,100.898517,https://stream2.ioc.pattaya.go.th/live/RC-913.m3u8
+RC-924,RC-924 นาเกลือซอย 12,12.967819,100.899858,https://stream2.ioc.pattaya.go.th/live/RC-924.m3u8
+RC-925,RC-925 โพธิสัมพันธ์,12.960578,100.894892,https://stream2.ioc.pattaya.go.th/live/RC-925.m3u8
+RC-930,RC-930 ซอยบานเย็น (โพธิสาร ซ.8),12.959579,100.901758,https://stream2.ioc.pattaya.go.th/live/RC-930.m3u8
+RC-933,RC-933 โพธิสัมพันธ์,12.964305,100.898295,https://stream2.ioc.pattaya.go.th/live/RC-933.m3u8
+RC-934,RC-934 แยกด้านในนาเกลือซอย14,12.96539,100.895589,https://stream2.ioc.pattaya.go.th/live/RC-934.m3u8
+RC-938,RC-938 แยกด้านในนาเกลือซอย16,12.964018,100.889251,https://stream2.ioc.pattaya.go.th/live/RC-938.m3u8
+SC-001,SC-001 แยกซอยวัดธรรมเลียบทางรถไฟ,12.915802,100.901811,https://stream2.ioc.pattaya.go.th/live/SC-001.m3u8
+SC-002,SC-002 แยกซอยวัดธรรมเลียบทางรถไฟ,12.915832,100.90189,https://stream2.ioc.pattaya.go.th/live/SC-002.m3u8
+SC-008,SC-008 แยกเขาตาโลเลียบทางรถไฟ,12.909119,100.901134,https://stream2.ioc.pattaya.go.th/live/SC-008.m3u8
+SC-009,SC-009 แยกเขาตาโลเลียบทางรถไฟ,12.9092119,100.901174,https://stream2.ioc.pattaya.go.th/live/SC-009.m3u8
+SC-010,SC-010 แยกเขาตาโล,12.90898,100.9011,https://stream2.ioc.pattaya.go.th/live/SC-010.m3u8
+SC-014,SC-014 จุดกลับรถเขาตาโล,12.910169,100.895951,https://stream2.ioc.pattaya.go.th/live/SC-014.m3u8
+SC-015,SC-015 จุดกลับรถเขาตาโล,12.910026,100.895924,https://stream2.ioc.pattaya.go.th/live/SC-015.m3u8
+SC-020,SC-020 บริเวณ ถนนพัทยาใต้ ซ. 22,12.923986,100.879313,https://stream2.ioc.pattaya.go.th/live/SC-020.m3u8
+SC-021,SC-021 บริเวณ ถนนพัทยาใต้ ซ. 22,12.923989,100.879297,https://stream2.ioc.pattaya.go.th/live/SC-021.m3u8
+SC-022,SC-022 สี่แยกชารีออท,12.918975,100.885584,https://stream2.ioc.pattaya.go.th/live/SC-022.m3u8
+SC-029,SC-029  บริเวณ ถนนพัทยาสายสอง,12.92573,100.874759,https://stream2.ioc.pattaya.go.th/live/SC-029.m3u8
+SC-030,SC-030 บริเวณ ถนนพัทยาสายสอง - ด้านข้างโรงเรียนเมืองพัทยา 8,12.925714,100.874788,https://stream2.ioc.pattaya.go.th/live/SC-030.m3u8
+SC-069,SC-069 บริเวณ ชายหาดพัทยา ซ.15,12.9266,100.873619,https://stream2.ioc.pattaya.go.th/live/SC-069.m3u8
+SC-076,SC-076 บริเวณ หน้าร้านเจ้หน่อยซีฟู้ด,12.925186,100.870604,https://stream2.ioc.pattaya.go.th/live/SC-076.m3u8
+SC-079,SC-079 บริเวณ หน้าโรงแรม LAGRILLAPE,12.925028,100.870198,https://stream2.ioc.pattaya.go.th/live/SC-079.m3u8
+SC-081,SC-081 บริเวณ หน้าร้าน Rasputin,12.924851,100.869719,https://stream2.ioc.pattaya.go.th/live/SC-081.m3u8
+SC-083,SC-083 บริเวณ อาคารจอดรถแหลมบาลีฮาย,12.924731,100.868032,https://stream2.ioc.pattaya.go.th/live/SC-083.m3u8
+SC-086,SC-086 ท่าเทียบเรือแหลมบาลีฮาย,12.924831,100.86715,https://stream2.ioc.pattaya.go.th/live/SC-086.m3u8
+SC-094,SC-094 ท่าเทียบเรือแหลมบาลีฮาย,12.925134,100.866455,https://stream2.ioc.pattaya.go.th/live/SC-094.m3u8
+SC-112,SC-112 บริเวณ ทางลงสะพานต่างระดับแหลมบาลีฮาย,12.923665,100.866959,https://stream2.ioc.pattaya.go.th/live/SC-112.m3u8
+SC-139 ,SC-139  ปากซอยทัพพระยา 10 ตัวที่ 1,12.911095,100.86933,https://stream2.ioc.pattaya.go.th/live/SC-139 .m3u8
+SC-141,SC-141 ถนนทัพพระยา,12.907735,100.868987,https://stream2.ioc.pattaya.go.th/live/SC-141.m3u8
+SC-152,SC-152 แยกหนองกระบอกเลียบทางรถไฟ,12.8996841,100.9001206,https://stream2.ioc.pattaya.go.th/live/SC-152.m3u8
+SC-154,SC-154 ปากซ.สุขุมวิทพัทยา 54,12.901301,100.89652,https://stream2.ioc.pattaya.go.th/live/SC-154.m3u8
+SC-155,SC-155 ปากซ.สุขุมวิทพัทยา 54,12.901168,100.89653,https://stream2.ioc.pattaya.go.th/live/SC-155.m3u8
+SC-168,SC-168 สามแยกเทพพระยา,12.9044424,100.8692873,https://stream2.ioc.pattaya.go.th/live/SC-168.m3u8
+SC-169,SC-169 ปากซ.เทพประสิทธิ์ ซ.8,12.907757,100.883494,https://stream2.ioc.pattaya.go.th/live/SC-169.m3u8
+SC-171,SC-171 ซอยร่มโพธิ์ ถ.จอมเทียนสาย 2,12.898483,100.87687,https://stream2.ioc.pattaya.go.th/live/SC-171.m3u8
+SC-177,SC-177 ปากซอยวัดบุณย์กัญจนาราม 4,12.890051,100.887864,https://stream2.ioc.pattaya.go.th/live/SC-177.m3u8
+SC-179,SC-179 แยกสุขุมวิทวัดบุณย์กัญจนาราม,12.889507,100.897276,https://stream2.ioc.pattaya.go.th/live/SC-179.m3u8
+SC-184,SC-184 ซอยสุขุมวิท-พัทยา 89,12.890095,100.899651,https://stream2.ioc.pattaya.go.th/live/SC-184.m3u8
+SC-187,SC-187 TVA-095 แยกหนองหินเลียบทางรถไฟ,12.88979,100.9011,https://stream2.ioc.pattaya.go.th/live/SC-187.m3u8
+SC-188,SC-188 แยกหนองหินเลียบทางรถไฟ,12.8897415,100.9010178,https://stream2.ioc.pattaya.go.th/live/SC-188.m3u8
+SC-191,SC-191 แยกทุ่งกลมตาลหมันเลียบทางรถไฟ,12.894574,100.899746,https://stream2.ioc.pattaya.go.th/live/SC-191.m3u8
+SC-194,SC-194 ชัยพฤกษ์2,12.8823022,100.9041419,https://stream2.ioc.pattaya.go.th/live/SC-194.m3u8
+SC-195,SC-195 TVA-097 แยกชัยพฤกษ์ 2 เลียบทางรถไฟ,12.88222,100.9043,https://stream1.ioc.pattaya.go.th/live/SC-195.m3u8
+SC-196,SC-196 แยกชัยพฤกษ์ 2 เลียบทางรถไฟ,12.88233,100.905181,https://stream2.ioc.pattaya.go.th/live/SC-196.m3u8
+SC-203,SC-203 กลางซอยสุขุมวิท-พัทยา 91,12.8777924,100.9107026,https://stream2.ioc.pattaya.go.th/live/SC-203.m3u8
+SC-204,SC-204 ปากซอยสุขุมวิทพัทยา 91/1,12.876708,100.90068,https://stream2.ioc.pattaya.go.th/live/SC-204.m3u8
+SC-303,SC-303 แยกวัดบุญกัญจนาราม-ถนนสุขุมวิท,12.8896376,100.8976583,https://stream2.ioc.pattaya.go.th/live/SC-303.m3u8
+SC-304,SC-304 แยกหนองพอง,12.887923,100.881362,https://stream2.ioc.pattaya.go.th/live/SC-304.m3u8
+SC-315,SC-315 แยกเลียบหาดจอมเทียน-ชัยพฤกษ์,12.877441,100.885122,https://stream2.ioc.pattaya.go.th/live/SC-315.m3u8
+SC-318,SC-318 แยกจอมเทียนสาย 2 ตัดสุขุมวิท,12.8720602,100.9023153,https://stream2.ioc.pattaya.go.th/live/SC-318.m3u8
+SC-325,SC-325 FLD-01 มาบประดู่ (เขาตาโล),12.904337,100.89659,https://stream1.ioc.pattaya.go.th/live/SC-325.m3u8
+SC-329,SC-329 FLD-05 หน้าห้างMEGA HOME,12.904337,100.89659,https://stream1.ioc.pattaya.go.th/live/SC-329.m3u8
+SC-332,SC-332 FLD-18 ศูนย์กีฬาเยาวชนเมืองพัทยา,12.895335,100.887094,https://stream2.ioc.pattaya.go.th/live/SC-332.m3u8
