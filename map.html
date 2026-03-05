@@ -39,6 +39,7 @@
             }).addTo(map);
 
             var hls = null;
+            var allMarkers = [];
 
             // Red icon for offline cameras
             var redIcon = L.icon({
@@ -50,32 +51,6 @@
                 shadowSize: [41, 41],
                 shadowAnchor: [12, 41]
             });
-
-            fetch('/api/cameras')
-                .then(function(r) { return r.json(); })
-                .then(function(cameras) {
-                    var markers = L.markerClusterGroup({ maxClusterRadius: 40 });
-                    cameras.forEach(function(cam) {
-                        if (!cam.lat || !cam.lon) return;
-
-                        var statusClass = cam.status === 'online' ? 'online' : 'offline';
-                        var statusText = cam.status === 'online' ? 'Online' : 'Offline';
-                        var popupHtml =
-                            '<div class="cam-popup">' +
-                                '<div class="cam-name">' + cam.name + '</div>' +
-                                '<div class="cam-status ' + statusClass + '">' + statusText + '</div>' +
-                                '<video id="video" width="320" height="240" autoplay muted></video>' +
-                            '</div>';
-
-                        var opts = cam.status === 'offline' ? { icon: redIcon } : {};
-                        var m = L.marker([cam.lat, cam.lon], opts);
-                        m.bindPopup(popupHtml, { maxWidth: 360 });
-                        m._streamUrl = cam.stream_url;
-                        m._camId = cam.id;
-                        markers.addLayer(m);
-                    });
-                    map.addLayer(markers);
-                });
 
             // Default blue icon (for restoring from red)
             var blueIcon = L.icon({
@@ -89,30 +64,95 @@
                 shadowAnchor: [12, 41]
             });
 
+            // --- Check visible markers on map ---
+            var checkTimer = null;
+            var checking = false;
+
+            function checkVisibleMarkers() {
+                if (checking || allMarkers.length === 0) return;
+                var bounds = map.getBounds();
+                var visibleIds = [];
+                var markerMap = {};
+                allMarkers.forEach(function(m) {
+                    if (bounds.contains(m.getLatLng()) && m._camId) {
+                        visibleIds.push(m._camId);
+                        markerMap[m._camId] = m;
+                    }
+                });
+                if (visibleIds.length === 0) return;
+
+                checking = true;
+                fetch('/api/cameras/check-batch', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ ids: visibleIds })
+                })
+                .then(function(r) { return r.json(); })
+                .then(function(results) {
+                    results.forEach(function(r) {
+                        var marker = markerMap[r.id];
+                        if (marker) {
+                            marker._status = r.status;
+                            marker.setIcon(r.status === 'offline' ? redIcon : blueIcon);
+                        }
+                    });
+                })
+                .catch(function() {})
+                .finally(function() { checking = false; });
+            }
+
+            function debouncedCheck() {
+                if (checkTimer) clearTimeout(checkTimer);
+                checkTimer = setTimeout(checkVisibleMarkers, 600);
+            }
+
+            map.on('moveend', debouncedCheck);
+
+            // --- Load cameras ---
+            fetch('/api/cameras')
+                .then(function(r) { return r.json(); })
+                .then(function(cameras) {
+                    var markers = L.markerClusterGroup({ maxClusterRadius: 40 });
+                    cameras.forEach(function(cam) {
+                        if (!cam.lat || !cam.lon) return;
+
+                        var opts = cam.status === 'offline' ? { icon: redIcon } : {};
+                        var m = L.marker([cam.lat, cam.lon], opts);
+
+                        var statusClass = cam.status === 'online' ? 'online' : 'offline';
+                        var statusText = cam.status === 'online' ? 'Online' : 'Offline';
+                        var popupHtml =
+                            '<div class="cam-popup">' +
+                                '<div class="cam-name">' + cam.name + '</div>' +
+                                '<div class="cam-status ' + statusClass + '">' + statusText + '</div>' +
+                                '<video id="video" width="320" height="240" autoplay muted></video>' +
+                            '</div>';
+
+                        m.bindPopup(popupHtml, { maxWidth: 360 });
+                        m._streamUrl = cam.stream_url;
+                        m._camId = cam.id;
+                        m._status = cam.status;
+                        markers.addLayer(m);
+                        allMarkers.push(m);
+                    });
+                    map.addLayer(markers);
+
+                    // Check visible markers right after loading
+                    checkVisibleMarkers();
+                });
+
+            // --- Popup: play video + show updated status ---
             map.on('popupopen', function(e) {
                 var marker = e.popup._source;
                 var url = marker._streamUrl;
-                var camId = marker._camId;
 
-                // Check live status
-                if (camId) {
-                    fetch('/api/cameras/check-one', {
-                        method: 'POST',
-                        headers: {'Content-Type':'application/json'},
-                        body: JSON.stringify({ id: camId })
-                    })
-                    .then(function(r) { return r.json(); })
-                    .then(function(data) {
-                        // Update marker icon
-                        marker.setIcon(data.status === 'offline' ? redIcon : blueIcon);
-                        // Update popup status text
-                        var statusEl = marker.getPopup().getElement().querySelector('.cam-status');
-                        if (statusEl) {
-                            statusEl.className = 'cam-status ' + data.status;
-                            statusEl.textContent = data.status === 'online' ? 'Online' : 'Offline';
-                        }
-                    })
-                    .catch(function() {});
+                // Update popup status text from stored status
+                if (marker._status) {
+                    var statusEl = marker.getPopup().getElement().querySelector('.cam-status');
+                    if (statusEl) {
+                        statusEl.className = 'cam-status ' + marker._status;
+                        statusEl.textContent = marker._status === 'online' ? 'Online' : 'Offline';
+                    }
                 }
 
                 if (url) {

@@ -154,6 +154,20 @@ async function handleAPI(req, res) {
     }
   }
 
+  // POST /api/cameras/check-batch (public - for map visible markers)
+  // body: { ids: [1,2,3,...] }
+  if (path === "/api/cameras/check-batch" && method === "POST") {
+    try {
+      const body = await readBody(req);
+      const ids = Array.isArray(body.ids) ? body.ids : [];
+      if (ids.length === 0) return json(res, 200, []);
+      const results = await checkCamerasByIds(ids);
+      return json(res, 200, results);
+    } catch (e) {
+      return json(res, 500, { error: e.message });
+    }
+  }
+
   // POST /api/cameras/check-one (public - for map popup)
   // body: { id: 123 }
   if (path === "/api/cameras/check-one" && method === "POST") {
